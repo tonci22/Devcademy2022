@@ -1,9 +1,17 @@
 package com.agency04.devcademy.api.accomodation;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import java.net.URL;
-
+@Entity
 public class Accommodation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Size(max = 100)
     private String title;
     @Size(max = 200)
@@ -30,6 +38,14 @@ public class Accommodation {
         this.imageUrl = imageUrl;
         this.freeCancelation = freeCancelation;
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -94,5 +110,20 @@ public class Accommodation {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
