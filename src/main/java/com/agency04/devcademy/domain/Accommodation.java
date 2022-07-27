@@ -1,11 +1,10 @@
-package com.agency04.devcademy.api.accomodation;
+package com.agency04.devcademy.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
-import java.net.URL;
 import java.util.Objects;
 
 @Entity
@@ -23,7 +22,7 @@ public class Accommodation {
     private Integer categorization;
     @Size(min = 1)
     private Integer personCount;
-    private URL imageUrl;
+    private String imageUrl;
     private boolean freeCancelation = true;
     private double price;
 
@@ -31,7 +30,7 @@ public class Accommodation {
 
     public Accommodation(){}
 
-    public Accommodation(String title, String subtitle, String description, Integer categorization, Integer personCount, URL imageUrl, boolean freeCancelation, double price) {
+    public Accommodation(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
@@ -90,11 +89,11 @@ public class Accommodation {
         this.personCount = personCount;
     }
 
-    public URL getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(URL imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
