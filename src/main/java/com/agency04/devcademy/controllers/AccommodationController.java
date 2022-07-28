@@ -2,9 +2,13 @@ package com.agency04.devcademy.controllers;
 
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.AccommodationCreateDto;
+import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.service.AccommodationService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 
@@ -19,24 +23,32 @@ public class AccommodationController {
     }
 
     @GetMapping
-    public Collection<Accommodation> getAccommodations(){
+    public Collection<Accommodation> getAccommodations() {
         return accommodationService.getAll();
     }
 
     @PostMapping
-    public Accommodation createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto){
-        Accommodation accommodation = new Accommodation();
-        accommodation.setTitle(accommodationCreateDto.getName());
+    public Accommodation createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
+
+        Accommodation accommodation = new Accommodation(accommodationCreateDto.getTitle(),
+                accommodationCreateDto.getSubtitle(), accommodationCreateDto.getDescription(), accommodationCreateDto.getCategorization(),
+                accommodationCreateDto.getPersonCount(), accommodationCreateDto.getImageUrl(), accommodationCreateDto.isFreeCancelation(),
+                accommodationCreateDto.getPrice(), AccommodationType.APARTMENT);
+
         return accommodationService.add(accommodation);
     }
 
-    @PutMapping
-    public String updateAccommodation(){
-        return "PUT";
+    @PutMapping("{id}")
+    public Accommodation updateCreateAccommodation(@RequestBody AccommodationUpdateDto accommodationUpdateDto, @PathVariable("id") Long id) {
+
+        Accommodation accommodation = accommodationService.getById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "No accommodation to update found!"));
+
+        return accommodationService.updateAccommodation(accommodation, accommodationUpdateDto);
+
     }
 
-    @DeleteMapping
-    public String deleteAccommodation(){
-        return "DELETE";
+    @DeleteMapping("{id}")
+    public void deleteAccommodation(@PathVariable("id") Long id) {
+        accommodationService.deleteById(id);
     }
 }

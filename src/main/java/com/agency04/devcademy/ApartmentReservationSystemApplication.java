@@ -1,6 +1,7 @@
 package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.service.AccommodationService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -29,11 +30,11 @@ public class ApartmentReservationSystemApplication {
         List<Accommodation> accommodations = new ArrayList<>() {
             {
                 add(new Accommodation("title", "subtitle", "opis", 3, 5,
-                        "https://www.picture.com", true, 545));
+                        "https://www.picture.com", true, 545, AccommodationType.APARTMENT));
                 add(new Accommodation("title1", "subtitle1", "opis1", 2, 2,
-                        "https://www.picture.com", true, 223));
+                        "https://www.picture.com", true, 223, AccommodationType.ROOM));
                 add(new Accommodation("title2", "subtitle2", "opis", 1, 10,
-                        "https://www.picture.com", false, 860));
+                        "https://www.picture.com", false, 860, AccommodationType.MOBILE_HOME));
             }
         };
 

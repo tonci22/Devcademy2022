@@ -1,5 +1,7 @@
 package com.agency04.devcademy.domain;
 
+import com.agency04.devcademy.enums.AccommodationType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,11 +28,11 @@ public class Accommodation {
     private boolean freeCancelation = true;
     private double price;
 
-    public enum Type {ROOM, APARTMENT, MOBILE_HOME}
+    private AccommodationType type;
 
     public Accommodation(){}
 
-    public Accommodation(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price) {
+    public Accommodation(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price, AccommodationType type) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
@@ -39,6 +41,7 @@ public class Accommodation {
         this.imageUrl = imageUrl;
         this.freeCancelation = freeCancelation;
         this.price = price;
+        this.type = type;
     }
 
     public Long getId() {
@@ -112,6 +115,15 @@ public class Accommodation {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public AccommodationType getType() {
+        return type;
+    }
+
+    public void setType(AccommodationType type) {
+        this.type = type;
+    }
+
 
     @Override
     public String toString() {
