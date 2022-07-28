@@ -1,11 +1,11 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.dto.AccommodationCreateDto;
 import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.repositories.AccommodationRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -24,7 +24,13 @@ public class AccommodationServiceImpl implements AccommodationService{
     }
 
     @Override
-    public Accommodation add(Accommodation accommodation) {
+    public Accommodation add(AccommodationCreateDto accommodationCreateDto) {
+
+        Accommodation accommodation = new Accommodation(accommodationCreateDto.getTitle(),
+                accommodationCreateDto.getSubtitle(), accommodationCreateDto.getDescription(), accommodationCreateDto.getCategorization(),
+                accommodationCreateDto.getPersonCount(), accommodationCreateDto.getImageUrl(), accommodationCreateDto.isFreeCancelation(),
+                accommodationCreateDto.getPrice(), accommodationCreateDto.getType());
+
         return accommodationRepository.save(accommodation);
     }
 

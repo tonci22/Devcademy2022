@@ -30,12 +30,7 @@ public class AccommodationController {
     @PostMapping
     public Accommodation createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
 
-        Accommodation accommodation = new Accommodation(accommodationCreateDto.getTitle(),
-                accommodationCreateDto.getSubtitle(), accommodationCreateDto.getDescription(), accommodationCreateDto.getCategorization(),
-                accommodationCreateDto.getPersonCount(), accommodationCreateDto.getImageUrl(), accommodationCreateDto.isFreeCancelation(),
-                accommodationCreateDto.getPrice(), AccommodationType.APARTMENT);
-
-        return accommodationService.add(accommodation);
+        return accommodationService.add(accommodationCreateDto);
     }
 
     @PutMapping("{id}")

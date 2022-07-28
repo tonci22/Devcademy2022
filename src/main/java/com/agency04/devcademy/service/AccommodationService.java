@@ -1,6 +1,7 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.dto.AccommodationCreateDto;
 import com.agency04.devcademy.dto.AccommodationUpdateDto;
 
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Optional;
 public interface AccommodationService {
 
     Optional<Accommodation> getById(Long id);
-    Accommodation add(Accommodation accommodation);
+    Accommodation add(AccommodationCreateDto accommodation);
 
     Collection<Accommodation> addAll(Collection<Accommodation> accommodations);
 
