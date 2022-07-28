@@ -27,7 +27,6 @@ public class Accommodation {
     private String imageUrl;
     private boolean freeCancelation = true;
     private double price;
-
     private AccommodationType type;
 
     public Accommodation(){}
@@ -134,9 +133,10 @@ public class Accommodation {
                 ", description='" + description + '\'' +
                 ", categorization=" + categorization +
                 ", personCount=" + personCount +
-                ", imageUrl=" + imageUrl +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", freeCancelation=" + freeCancelation +
                 ", price=" + price +
+                ", type=" + type +
                 '}';
     }
 

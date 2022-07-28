@@ -8,15 +8,10 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface AccommodationService {
-
     Optional<Accommodation> getById(Long id);
     Accommodation add(AccommodationCreateDto accommodation);
-
     Collection<Accommodation> addAll(Collection<Accommodation> accommodations);
-
     Collection<Accommodation> getAll();
-
     Accommodation updateAccommodation(Accommodation accommodation1, AccommodationUpdateDto accommodation);
-
     void deleteById(Long id);
 }

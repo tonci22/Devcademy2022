@@ -29,15 +29,12 @@ public class AccommodationController {
 
     @PostMapping
     public Accommodation createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
-
         return accommodationService.add(accommodationCreateDto);
     }
 
     @PutMapping("{id}")
     public Accommodation updateCreateAccommodation(@RequestBody AccommodationUpdateDto accommodationUpdateDto, @PathVariable("id") Long id) {
-
         Accommodation accommodation = accommodationService.getById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "No accommodation to update found!"));
-
         return accommodationService.updateAccommodation(accommodation, accommodationUpdateDto);
 
     }
