@@ -3,7 +3,7 @@ package com.agency04.devcademy.service;
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.AccommodationCreateDto;
 import com.agency04.devcademy.dto.AccommodationUpdateDto;
-import com.agency04.devcademy.enums.AccommodationType;
+import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.AccommodationRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service("accommodationServiceImpl")
-public class AccommodationServiceImpl implements AccommodationService{
+public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;
 
     public AccommodationServiceImpl(AccommodationRepository accommodationRepository) {
@@ -26,11 +26,8 @@ public class AccommodationServiceImpl implements AccommodationService{
     @Override
     public Accommodation add(AccommodationCreateDto accommodationCreateDto) {
 
-        Accommodation accommodation = new Accommodation(accommodationCreateDto.getTitle(),
-                accommodationCreateDto.getSubtitle(), accommodationCreateDto.getDescription(), accommodationCreateDto.getCategorization(),
-                accommodationCreateDto.getPersonCount(), accommodationCreateDto.getImageUrl(), accommodationCreateDto.isFreeCancelation(),
-                accommodationCreateDto.getPrice(), accommodationCreateDto.getType());
-
+        Accommodation accommodation = new Accommodation();
+        accommodation.mapFrom(accommodationCreateDto);
         return accommodationRepository.save(accommodation);
     }
 
@@ -45,26 +42,18 @@ public class AccommodationServiceImpl implements AccommodationService{
     }
 
     @Override
-    public Accommodation updateAccommodation(Accommodation accommodation, AccommodationUpdateDto accommodationUpdateDto) {
-
-        accommodation.setTitle(accommodationUpdateDto.getTitle());
-        accommodation.setSubtitle(accommodationUpdateDto.getSubtitle());
-        accommodation.setDescription(accommodationUpdateDto.getDescription());
-        accommodation.setCategorization(accommodationUpdateDto.getCategorization());
-        accommodation.setPersonCount(accommodationUpdateDto.getPersonCount());
-        accommodation.setImageUrl(accommodationUpdateDto.getImageUrl());
-        accommodation.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
-        accommodation.setPrice(accommodationUpdateDto.getPrice());
-        accommodation.setType(accommodationUpdateDto.getType());
+    public Accommodation updateAccommodation(Long id, AccommodationUpdateDto accommodationUpdateDto) {
+        Accommodation accommodation = accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
+        accommodation.mapFrom(accommodationUpdateDto);
 
         accommodationRepository.save(accommodation);
 
         return accommodation;
-
     }
 
     @Override
     public void deleteById(Long id) {
+        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
         accommodationRepository.deleteById(id);
     }
 }

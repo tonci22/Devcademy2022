@@ -1,5 +1,7 @@
 package com.agency04.devcademy.domain;
 
+import com.agency04.devcademy.dto.AccommodationCreateDto;
+import com.agency04.devcademy.dto.AccommodationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
 import javax.persistence.Entity;
@@ -31,16 +33,10 @@ public class Accommodation {
 
     public Accommodation(){}
 
-    public Accommodation(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price, AccommodationType type) {
+    public Accommodation(String title, String subtitle, String description) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
-        this.categorization = categorization;
-        this.personCount = personCount;
-        this.imageUrl = imageUrl;
-        this.freeCancelation = freeCancelation;
-        this.price = price;
-        this.type = type;
     }
 
     public Long getId() {
@@ -123,6 +119,30 @@ public class Accommodation {
         this.type = type;
     }
 
+
+    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto){
+        this.setTitle(accommodationUpdateDto.getTitle());
+        this.setSubtitle(accommodationUpdateDto.getSubtitle());
+        this.setDescription(accommodationUpdateDto.getDescription());
+        this.setCategorization(accommodationUpdateDto.getCategorization());
+        this.setPersonCount(accommodationUpdateDto.getPersonCount());
+        this.setImageUrl(accommodationUpdateDto.getImageUrl());
+        this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
+        this.setPrice(accommodationUpdateDto.getPrice());
+        this.setType(accommodationUpdateDto.getType());
+    }
+
+    public void mapFrom(AccommodationCreateDto accommodationCreateDto){
+        this.setTitle(accommodationCreateDto.getTitle());
+        this.setSubtitle(accommodationCreateDto.getSubtitle());
+        this.setDescription(accommodationCreateDto.getDescription());
+        this.setCategorization(accommodationCreateDto.getCategorization());
+        this.setPersonCount(accommodationCreateDto.getPersonCount());
+        this.setImageUrl(accommodationCreateDto.getImageUrl());
+        this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
+        this.setPrice(accommodationCreateDto.getPrice());
+        this.setType(accommodationCreateDto.getType());
+    }
 
     @Override
     public String toString() {

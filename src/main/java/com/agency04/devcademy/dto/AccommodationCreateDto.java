@@ -1,10 +1,6 @@
 package com.agency04.devcademy.dto;
 
 import com.agency04.devcademy.enums.AccommodationType;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -26,16 +22,13 @@ public class AccommodationCreateDto {
 
     public AccommodationCreateDto(){}
 
-    public AccommodationCreateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price, AccommodationType type) {
+    public AccommodationCreateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
         this.imageUrl = imageUrl;
-        this.freeCancelation = freeCancelation;
-        this.price = price;
-        this.type = type;
     }
 
     public String getTitle() {

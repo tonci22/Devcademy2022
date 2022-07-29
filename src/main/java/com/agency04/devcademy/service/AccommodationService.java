@@ -12,6 +12,6 @@ public interface AccommodationService {
     Accommodation add(AccommodationCreateDto accommodation);
     Collection<Accommodation> addAll(Collection<Accommodation> accommodations);
     Collection<Accommodation> getAll();
-    Accommodation updateAccommodation(Accommodation accommodation1, AccommodationUpdateDto accommodation);
+    Accommodation updateAccommodation(Long id, AccommodationUpdateDto accommodation);
     void deleteById(Long id);
 }

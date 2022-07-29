@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @SpringBootApplication
@@ -29,14 +30,20 @@ public class ApartmentReservationSystemApplication {
     public void initData() {
         List<Accommodation> accommodations = new ArrayList<>() {
             {
-                add(new Accommodation("title", "subtitle", "opis", 3, 5,
-                        "https://www.picture.com", true, 545, AccommodationType.APARTMENT));
-                add(new Accommodation("title1", "subtitle1", "opis1", 2, 2,
-                        "https://www.picture.com", true, 223, AccommodationType.ROOM));
-                add(new Accommodation("title2", "subtitle2", "opis", 1, 10,
-                        "https://www.picture.com", false, 860, AccommodationType.MOBILE_HOME));
+                add(new Accommodation("titl","subtit", "opis"));
+                add(new Accommodation("titl1","subtit1", "opis1"));
+                add(new Accommodation("titl2","subtit2", "opis2"));
             }
         };
+
+        for (Accommodation accommodation: accommodations) {
+            accommodation.setPrice(new Random().nextInt(999));
+            accommodation.setType(AccommodationType.APARTMENT);
+            accommodation.setFreeCancelation(false);
+            accommodation.setCategorization(new Random().nextInt(4) + 1);
+            accommodation.setImageUrl("www.slike.com");
+            accommodation.setPersonCount(new Random().nextInt(11) + 1);
+        }
 
         accommodationService.addAll(accommodations);
     }

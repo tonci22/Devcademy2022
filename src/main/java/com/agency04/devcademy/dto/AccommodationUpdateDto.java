@@ -23,16 +23,13 @@ public class AccommodationUpdateDto {
 
     public AccommodationUpdateDto(){}
 
-    public AccommodationUpdateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl, boolean freeCancelation, double price, AccommodationType type) {
+    public AccommodationUpdateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
         this.imageUrl = imageUrl;
-        this.freeCancelation = freeCancelation;
-        this.price = price;
-        this.type = type;
     }
 
     public String getTitle() {
