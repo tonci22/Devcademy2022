@@ -5,11 +5,13 @@ import com.agency04.devcademy.dto.AccommodationCreateDto;
 import com.agency04.devcademy.dto.AccommodationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.AccommodationRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Primary
 @Service("accommodationServiceImpl")
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;

@@ -1,11 +1,14 @@
 package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.domain.Owner;
 import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.service.AccommodationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -17,6 +20,8 @@ import java.util.Random;
 public class ApartmentReservationSystemApplication {
 
     private final AccommodationService accommodationService;
+    @Autowired
+    private ApplicationContext ctx;
 
     public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationRepository) {
         this.accommodationService = accommodationRepository;
@@ -44,6 +49,9 @@ public class ApartmentReservationSystemApplication {
             accommodation.setImageUrl("www.slike.com");
             accommodation.setPersonCount(new Random().nextInt(11) + 1);
         }
+
+        Owner owner = ctx.getBean(Owner.class);
+        System.out.println(owner);
 
         accommodationService.addAll(accommodations);
     }
