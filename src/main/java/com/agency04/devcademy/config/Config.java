@@ -4,7 +4,8 @@ import com.agency04.devcademy.service.RoomAccommodationService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
-@PropertySource("classpath:ara.properties")
+
+@PropertySource("classpath:application-ara.properties")
 @ImportResource("classpath:config.xml")
 @Configuration
 public class Config {
@@ -21,12 +22,11 @@ public class Config {
     @Value("${accommodation.owner.instagram}")
     private String accommodationOwnerInstagram;
 
-
     @Bean("roomAccommodationService")
     @Primary
     RoomAccommodationService accommodationService(){
-        //print
-        System.out.println("Owner:" + accommodationOwner + " Name: " + accommodationOwnerName + " Facebook: " + accommodationOwnerFacebook + " Instagram: " + accommodationOwnerInstagram);
+
+        System.out.println("Owner:" + accommodationOwner + "\nName: " + accommodationOwnerName + "\nFacebook: " + accommodationOwnerFacebook + "\nInstagram: " + accommodationOwnerInstagram);
         return new RoomAccommodationService();
     }
 
