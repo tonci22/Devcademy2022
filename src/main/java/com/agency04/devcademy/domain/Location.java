@@ -1,27 +1,51 @@
 package com.agency04.devcademy.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.agency04.devcademy.dto.LocationCreateDto;
+import com.agency04.devcademy.dto.LocationUpdateDto;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name","postalCode"})})
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 150)
     private String name;
     private Integer postalCode;
 
+    @OneToMany(mappedBy = "location")
+    private Set<Accommodation> accommodations;
+
     public Location() {
+    }
+
+    public Location(String name, Integer postalCode) {
+        this.name = name;
+        this.postalCode = postalCode;
+    }
+
+    public Location(String name, Integer postalCode, Set<Accommodation> accommodations) {
+        this.name = name;
+        this.postalCode = postalCode;
+        this.accommodations = accommodations;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Accommodation> getAccommodations() {
+        return accommodations;
+    }
+
+    public void setAccommodations(Set<Accommodation> accommodations) {
+        this.accommodations = accommodations;
     }
 
     public String getName() {
@@ -38,5 +62,15 @@ public class Location {
 
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public void mapFrom(LocationCreateDto locationCreateDto) {
+        this.setName(locationCreateDto.getName());
+        this.setPostalCode(locationCreateDto.getPostalCode());
+    }
+
+    public void mapFrom(LocationUpdateDto locationUpdateDto){
+        this.setName(locationUpdateDto.getName());
+        this.setPostalCode(locationUpdateDto.getPostalCode());
     }
 }

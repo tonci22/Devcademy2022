@@ -23,7 +23,6 @@ public class Config {
     private String accommodationOwnerInstagram;
 
     @Bean("roomAccommodationService")
-    @Primary
     RoomAccommodationService accommodationService(){
 
         System.out.println("Owner:" + accommodationOwner + "\nName: " + accommodationOwnerName + "\nFacebook: " + accommodationOwnerFacebook + "\nInstagram: " + accommodationOwnerInstagram);

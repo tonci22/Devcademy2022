@@ -55,7 +55,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public void deleteById(Long id) {
-        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
+        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation id not found"));
         accommodationRepository.deleteById(id);
     }
 }

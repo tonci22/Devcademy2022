@@ -4,10 +4,9 @@ import com.agency04.devcademy.dto.AccommodationCreateDto;
 import com.agency04.devcademy.dto.AccommodationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -22,14 +21,20 @@ public class Accommodation {
     @Size(max = 200)
     private String subtitle;
     private String description;
-    @Size(min = 1, max = 5)
+
+    @Min(1)
+    @Max(5)
     private Integer categorization;
-    @Size(min = 1)
+    @Min(1)
     private Integer personCount;
     private String imageUrl;
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     public Accommodation(){}
 
@@ -45,6 +50,14 @@ public class Accommodation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getTitle() {
