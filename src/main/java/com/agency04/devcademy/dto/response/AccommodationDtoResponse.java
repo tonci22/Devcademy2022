@@ -1,11 +1,13 @@
-package com.agency04.devcademy.dto;
+package com.agency04.devcademy.dto.response;
 
 import com.agency04.devcademy.enums.AccommodationType;
+
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class AccommodationCreateDto {
+public class AccommodationDtoResponse {
 
+    private Long id;
     @Size(max = 100)
     private String title;
     @Size(max = 200)
@@ -20,15 +22,25 @@ public class AccommodationCreateDto {
     private double price;
     private AccommodationType type;
 
-    public AccommodationCreateDto(){}
+    private LocationDtoResponse location;
 
-    public AccommodationCreateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
+    public AccommodationDtoResponse(){}
+
+    public AccommodationDtoResponse(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
         this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -103,11 +115,19 @@ public class AccommodationCreateDto {
         this.type = type;
     }
 
+    public LocationDtoResponse getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationDtoResponse location) {
+        this.location = location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccommodationCreateDto that = (AccommodationCreateDto) o;
+        AccommodationDtoResponse that = (AccommodationDtoResponse) o;
         return freeCancelation == that.freeCancelation && Double.compare(that.price, price) == 0 && Objects.equals(title, that.title) && Objects.equals(subtitle, that.subtitle) && Objects.equals(description, that.description) && Objects.equals(categorization, that.categorization) && Objects.equals(personCount, that.personCount) && Objects.equals(imageUrl, that.imageUrl);
     }
 

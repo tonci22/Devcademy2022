@@ -1,14 +1,15 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.dto.AccommodationCreateDto;
-import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.AccommodationRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Primary

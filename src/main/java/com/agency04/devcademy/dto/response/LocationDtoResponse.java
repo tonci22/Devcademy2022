@@ -1,19 +1,25 @@
-package com.agency04.devcademy.dto;
+package com.agency04.devcademy.dto.response;
 
-import javax.validation.constraints.Size;
 
-public class LocationCreateDto {
+public class LocationDtoResponse {
 
-    @Size(max = 150)
+    private Long id;
     private String name;
     private Integer postalCode;
-
-    public LocationCreateDto() {
+    public LocationDtoResponse() {
     }
 
-    public LocationCreateDto(String name, Integer postalCode) {
+    public LocationDtoResponse(String name, Integer postalCode) {
         this.name = name;
         this.postalCode = postalCode;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -31,4 +37,7 @@ public class LocationCreateDto {
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
+
+
+
 }

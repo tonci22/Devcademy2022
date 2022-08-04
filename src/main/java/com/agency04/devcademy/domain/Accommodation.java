@@ -1,7 +1,7 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.AccommodationCreateDto;
-import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Accommodation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(max = 100)
     private String title;

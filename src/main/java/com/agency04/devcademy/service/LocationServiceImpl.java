@@ -1,8 +1,8 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.dto.LocationCreateDto;
-import com.agency04.devcademy.dto.LocationUpdateDto;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
+import com.agency04.devcademy.dto.request.LocationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,11 @@ public class LocationServiceImpl implements LocationService{
     @Override
     public Collection<Location> addAll(Collection<Location> locations) {
         return locationRepository.saveAll(locations);
+    }
+
+    @Override
+    public Location getById(Long id) {
+        return locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location not found"));
     }
 
     @Override

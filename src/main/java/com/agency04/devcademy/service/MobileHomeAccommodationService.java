@@ -1,10 +1,11 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.dto.AccommodationCreateDto;
-import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public class MobileHomeAccommodationService implements AccommodationService{

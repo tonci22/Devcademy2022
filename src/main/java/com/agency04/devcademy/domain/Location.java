@@ -1,7 +1,7 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.LocationCreateDto;
-import com.agency04.devcademy.dto.LocationUpdateDto;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
+import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -64,12 +64,18 @@ public class Location {
         this.postalCode = postalCode;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void mapFrom(LocationCreateDto locationCreateDto) {
+        this.setId(locationCreateDto.getId());
         this.setName(locationCreateDto.getName());
         this.setPostalCode(locationCreateDto.getPostalCode());
     }
 
     public void mapFrom(LocationUpdateDto locationUpdateDto){
+        this.setId(locationUpdateDto.getId());
         this.setName(locationUpdateDto.getName());
         this.setPostalCode(locationUpdateDto.getPostalCode());
     }

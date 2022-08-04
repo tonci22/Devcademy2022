@@ -1,12 +1,12 @@
-package com.agency04.devcademy.dto;
+package com.agency04.devcademy.dto.request;
 
 import com.agency04.devcademy.enums.AccommodationType;
-
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class AccommodationUpdateDto {
+public class AccommodationCreateDto {
 
+    private Long id;
     @Size(max = 100)
     private String title;
     @Size(max = 200)
@@ -21,15 +21,25 @@ public class AccommodationUpdateDto {
     private double price;
     private AccommodationType type;
 
-    public AccommodationUpdateDto(){}
+    private LocationCreateDto location;
 
-    public AccommodationUpdateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
+    public AccommodationCreateDto(){}
+
+    public AccommodationCreateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
         this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -104,16 +114,24 @@ public class AccommodationUpdateDto {
         this.type = type;
     }
 
+    public LocationCreateDto getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationCreateDto location) {
+        this.location = location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccommodationUpdateDto that = (AccommodationUpdateDto) o;
-        return freeCancelation == that.freeCancelation && Double.compare(that.price, price) == 0 && Objects.equals(title, that.title) && Objects.equals(subtitle, that.subtitle) && Objects.equals(description, that.description) && Objects.equals(categorization, that.categorization) && Objects.equals(personCount, that.personCount) && Objects.equals(imageUrl, that.imageUrl) && type == that.type;
+        AccommodationCreateDto that = (AccommodationCreateDto) o;
+        return freeCancelation == that.freeCancelation && Double.compare(that.price, price) == 0 && Objects.equals(title, that.title) && Objects.equals(subtitle, that.subtitle) && Objects.equals(description, that.description) && Objects.equals(categorization, that.categorization) && Objects.equals(personCount, that.personCount) && Objects.equals(imageUrl, that.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, subtitle, description, categorization, personCount, imageUrl, freeCancelation, price, type);
+        return Objects.hash(title, subtitle, description, categorization, personCount, imageUrl, freeCancelation, price);
     }
 }
