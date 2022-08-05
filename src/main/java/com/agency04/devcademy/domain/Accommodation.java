@@ -1,13 +1,14 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.AccommodationCreateDto;
-import com.agency04.devcademy.dto.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.mapper.LocationMapper;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -15,23 +16,30 @@ import java.util.Objects;
 public class Accommodation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(max = 100)
     private String title;
     @Size(max = 200)
     private String subtitle;
     private String description;
-    @Size(min = 1, max = 5)
+
+    @Min(1)
+    @Max(5)
     private Integer categorization;
-    @Size(min = 1)
+    @Min(1)
     private Integer personCount;
     private String imageUrl;
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
 
-    public Accommodation(){}
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    public Accommodation() {
+    }
 
     public Accommodation(String title, String subtitle, String description) {
         this.title = title;
@@ -45,6 +53,14 @@ public class Accommodation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getTitle() {
@@ -120,7 +136,13 @@ public class Accommodation {
     }
 
 
-    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto){
+    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
+
+        Location location = new Location();
+        location.setId(accommodationUpdateDto.getLocation().getId());
+        location.setName(accommodationUpdateDto.getLocation().getName());
+        location.setPostalCode(accommodationUpdateDto.getLocation().getPostalCode());
+
         this.setTitle(accommodationUpdateDto.getTitle());
         this.setSubtitle(accommodationUpdateDto.getSubtitle());
         this.setDescription(accommodationUpdateDto.getDescription());
@@ -130,9 +152,11 @@ public class Accommodation {
         this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
         this.setPrice(accommodationUpdateDto.getPrice());
         this.setType(accommodationUpdateDto.getType());
+        this.setLocation(location);
     }
 
-    public void mapFrom(AccommodationCreateDto accommodationCreateDto){
+    public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
+
         this.setTitle(accommodationCreateDto.getTitle());
         this.setSubtitle(accommodationCreateDto.getSubtitle());
         this.setDescription(accommodationCreateDto.getDescription());
@@ -142,6 +166,15 @@ public class Accommodation {
         this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
         this.setPrice(accommodationCreateDto.getPrice());
         this.setType(accommodationCreateDto.getType());
+        this.setLocation(mapDtoToLocation(accommodationCreateDto));
+    }
+
+    private Location mapDtoToLocation(AccommodationCreateDto accommodationCreateDto) {
+        Location location = new Location();
+        location.setId(accommodationCreateDto.getLocation().getId());
+        location.setName(accommodationCreateDto.getLocation().getName());
+        location.setPostalCode(accommodationCreateDto.getLocation().getPostalCode());
+        return location;
     }
 
     @Override
