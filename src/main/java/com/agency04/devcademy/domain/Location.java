@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name","postalCode"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "postalCode"})})
 public class Location {
 
     @Id
@@ -19,8 +19,10 @@ public class Location {
     private String name;
     private Integer postalCode;
 
-    @OneToMany(mappedBy = "location")
-    private Set<Accommodation> accommodations;
+
+    @OneToOne
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
 
     public Location() {
     }
@@ -30,22 +32,22 @@ public class Location {
         this.postalCode = postalCode;
     }
 
-    public Location(String name, Integer postalCode, Set<Accommodation> accommodations) {
+    public Location(String name, Integer postalCode, Accommodation accommodation) {
         this.name = name;
         this.postalCode = postalCode;
-        this.accommodations = accommodations;
+        this.accommodation = accommodation;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Set<Accommodation> getAccommodations() {
-        return accommodations;
+    public Accommodation getAccommodation() {
+        return accommodation;
     }
 
-    public void setAccommodations(Set<Accommodation> accommodations) {
-        this.accommodations = accommodations;
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
     }
 
     public String getName() {
@@ -74,7 +76,13 @@ public class Location {
         this.setPostalCode(locationCreateDto.getPostalCode());
     }
 
-    public void mapFrom(LocationUpdateDto locationUpdateDto){
+    public void mapFrom(LocationUpdateDto locationUpdateDto, Long id) {
+        this.setId(id);
+        this.setName(locationUpdateDto.getName());
+        this.setPostalCode(locationUpdateDto.getPostalCode());
+    }
+
+    public void mapFrom(LocationUpdateDto locationUpdateDto) {
         this.setId(locationUpdateDto.getId());
         this.setName(locationUpdateDto.getName());
         this.setPostalCode(locationUpdateDto.getPostalCode());

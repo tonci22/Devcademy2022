@@ -4,14 +4,15 @@ import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public class MobileHomeAccommodationService implements AccommodationService{
+
+
     @Override
-    public Optional<Accommodation> getById(Long id) {
-        return Optional.empty();
+    public Accommodation getById(Long id) {
+        return null;
     }
 
     @Override
@@ -20,12 +21,12 @@ public class MobileHomeAccommodationService implements AccommodationService{
     }
 
     @Override
-    public Collection<Accommodation> addAll(Collection<Accommodation> accommodations) {
+    public List<Accommodation> addAll(List<Accommodation> accommodations) {
         return null;
     }
 
     @Override
-    public Collection<Accommodation> getAll() {
+    public List<Accommodation> getAll() {
         return null;
     }
 

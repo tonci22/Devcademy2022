@@ -1,7 +1,9 @@
 package com.agency04.devcademy.domain;
 
+import com.agency04.devcademy.dto.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
 import javax.persistence.*;
@@ -32,11 +34,12 @@ public class Accommodation {
     private double price;
     private AccommodationType type;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "location_id")
     private Location location;
 
-    public Accommodation(){}
+    public Accommodation() {
+    }
 
     public Accommodation(String title, String subtitle, String description) {
         this.title = title;
@@ -133,7 +136,13 @@ public class Accommodation {
     }
 
 
-    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto){
+    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
+
+        Location location = new Location();
+        location.setId(accommodationUpdateDto.getLocation().getId());
+        location.setName(accommodationUpdateDto.getLocation().getName());
+        location.setPostalCode(accommodationUpdateDto.getLocation().getPostalCode());
+
         this.setTitle(accommodationUpdateDto.getTitle());
         this.setSubtitle(accommodationUpdateDto.getSubtitle());
         this.setDescription(accommodationUpdateDto.getDescription());
@@ -143,9 +152,11 @@ public class Accommodation {
         this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
         this.setPrice(accommodationUpdateDto.getPrice());
         this.setType(accommodationUpdateDto.getType());
+        this.setLocation(location);
     }
 
-    public void mapFrom(AccommodationCreateDto accommodationCreateDto){
+    public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
+
         this.setTitle(accommodationCreateDto.getTitle());
         this.setSubtitle(accommodationCreateDto.getSubtitle());
         this.setDescription(accommodationCreateDto.getDescription());
@@ -155,6 +166,15 @@ public class Accommodation {
         this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
         this.setPrice(accommodationCreateDto.getPrice());
         this.setType(accommodationCreateDto.getType());
+        this.setLocation(mapDtoToLocation(accommodationCreateDto));
+    }
+
+    private Location mapDtoToLocation(AccommodationCreateDto accommodationCreateDto) {
+        Location location = new Location();
+        location.setId(accommodationCreateDto.getLocation().getId());
+        location.setName(accommodationCreateDto.getLocation().getName());
+        location.setPostalCode(accommodationCreateDto.getLocation().getPostalCode());
+        return location;
     }
 
     @Override

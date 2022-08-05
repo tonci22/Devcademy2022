@@ -23,7 +23,7 @@ public class Config {
     private String accommodationOwnerInstagram;
 
     @Bean("roomAccommodationService")
-    RoomAccommodationService accommodationService(){
+    RoomAccommodationService accommodationService() {
 
         System.out.println("Owner:" + accommodationOwner + "\nName: " + accommodationOwnerName + "\nFacebook: " + accommodationOwnerFacebook + "\nInstagram: " + accommodationOwnerInstagram);
         return new RoomAccommodationService();

@@ -5,6 +5,7 @@ import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface LocationService {
 
@@ -12,7 +13,9 @@ public interface LocationService {
 
     Location add(Location location);
 
-    Collection<Location> addAll(Collection<Location> locations);
+    Location add(LocationUpdateDto locationUpdateDto);
+
+    List<Location> addAll(Collection<Location> locations);
 
     Location getById(Long id);
 

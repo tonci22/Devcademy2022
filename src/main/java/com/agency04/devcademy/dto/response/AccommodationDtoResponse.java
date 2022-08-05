@@ -2,29 +2,25 @@ package com.agency04.devcademy.dto.response;
 
 import com.agency04.devcademy.enums.AccommodationType;
 
-import javax.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class AccommodationDtoResponse {
 
     private Long id;
-    @Size(max = 100)
     private String title;
-    @Size(max = 200)
     private String subtitle;
     private String description;
-    @Size(min = 1, max = 5)
     private Integer categorization;
-    @Size(min = 1)
     private Integer personCount;
     private String imageUrl;
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
-
     private LocationDtoResponse location;
 
-    public AccommodationDtoResponse(){}
+    public AccommodationDtoResponse() {
+    }
 
     public AccommodationDtoResponse(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
         this.title = title;

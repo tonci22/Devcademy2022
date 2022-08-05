@@ -8,9 +8,10 @@ import com.agency04.devcademy.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
-public class LocationServiceImpl implements LocationService{
+public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
 
@@ -20,6 +21,7 @@ public class LocationServiceImpl implements LocationService{
 
     @Override
     public Location add(LocationCreateDto locationCreateDto) {
+
         Location location = new Location();
         location.mapFrom(locationCreateDto);
 
@@ -32,7 +34,16 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public Collection<Location> addAll(Collection<Location> locations) {
+    public Location add(LocationUpdateDto locationUpdateDto) {
+
+        Location location = new Location();
+        location.mapFrom(locationUpdateDto);
+
+        return locationRepository.save(location);
+    }
+
+    @Override
+    public List<Location> addAll(Collection<Location> locations) {
         return locationRepository.saveAll(locations);
     }
 
@@ -42,7 +53,7 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public Collection<Location> getAll() {
+    public List<Location> getAll() {
         return locationRepository.findAll();
     }
 
@@ -50,7 +61,7 @@ public class LocationServiceImpl implements LocationService{
     public Location updateLocation(Long id, LocationUpdateDto locationUpdateDto) {
 
         Location location = locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location not found"));
-        location.mapFrom(locationUpdateDto);
+        location.mapFrom(locationUpdateDto, id);
         return locationRepository.save(location);
     }
 

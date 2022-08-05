@@ -30,6 +30,18 @@ public class ApartmentReservationSystemApplication {
 
     @PostConstruct
     public void initData() {
+
+        List<Location> locations = new ArrayList<>() {
+            {
+                add(new Location("Korcula", 20260));
+                add(new Location("Korcula", 20261));
+                add(new Location("Blato", 20253));
+                add(new Location("Vela Luka", 20456));
+                add(new Location("Lumbarda", 20263));
+            }
+        };
+        locationService.addAll(locations);
+
         List<Accommodation> accommodations = new ArrayList<>() {
             {
                 add(new Accommodation("titl", "subtit", "opis"));
@@ -45,26 +57,10 @@ public class ApartmentReservationSystemApplication {
             accommodation.setCategorization(new Random().nextInt(4) + 1);
             accommodation.setImageUrl("www.slike.com");
             accommodation.setPersonCount(new Random().nextInt(11) + 1);
+            accommodation.setLocation(locations.get(new Random().nextInt(locations.size())));
         }
 
-        accommodationService.addAll(accommodations);
-
-        List<Location> locations = new ArrayList<>() {
-            {
-                add(new Location("Korcula", 20260));
-                add(new Location("Korcula", 20261));
-                add(new Location("Blato", 20253));
-                add(new Location("Vela Luka", 20456));
-                add(new Location("Lumbarda", 20263));
-            }
-        };
-
-        locations.get(0).setAccommodations(new HashSet<>(accommodations));
         locationService.addAll(locations);
-        for (Accommodation accommodation : accommodations) {
-            accommodation.setLocation(locations.get(0));
-        }
         accommodationService.addAll(accommodations);
-        locationService.addAll(locations);
     }
 }

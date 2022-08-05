@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/accommodation")
@@ -24,29 +24,29 @@ public class AccommodationController {
     @Autowired
     private AccommodationMapper accommodationMapper;
 
-    public AccommodationController(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService,@Qualifier("locationServiceImpl") LocationService locationService) {
+    public AccommodationController(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService, @Qualifier("locationServiceImpl") LocationService locationService) {
         this.accommodationService = accommodationService;
         this.locationService = locationService;
     }
 
     @GetMapping
-    public ResponseEntity<Collection<AccommodationDtoResponse>> getAccommodations() {
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.getAll(), locationService.getAll()));
+    public ResponseEntity<List<AccommodationDtoResponse>> getAccommodations() {
+        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.getAll()));
     }
 
     @PostMapping
     public ResponseEntity<AccommodationDtoResponse> createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto), locationService.add(accommodationCreateDto.getLocation())));
+        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<AccommodationDtoResponse> updateAccommodation(@RequestBody AccommodationUpdateDto accommodationUpdateDto, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto), locationService.updateLocation(accommodationUpdateDto.getLocation().getId(), accommodationUpdateDto.getLocation())));
+        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto)));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteAccommodation(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteAccommodation(@PathVariable("id") Long id) {
         accommodationService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("DELETED");
     }
 }

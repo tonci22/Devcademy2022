@@ -6,6 +6,7 @@ public class LocationDtoResponse {
     private Long id;
     private String name;
     private Integer postalCode;
+
     public LocationDtoResponse() {
     }
 
@@ -37,7 +38,4 @@ public class LocationDtoResponse {
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
-
-
-
 }

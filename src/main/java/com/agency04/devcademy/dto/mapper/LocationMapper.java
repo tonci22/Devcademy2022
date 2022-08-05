@@ -13,7 +13,7 @@ import java.util.List;
 public class LocationMapper {
 
 
-    public LocationDtoResponse mapToDto(Location location){
+    public LocationDtoResponse mapToDto(Location location) {
 
         LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
 
@@ -24,24 +24,24 @@ public class LocationMapper {
         return locationDtoRequest;
     }
 
-   public Collection<LocationDtoResponse> mapToDto(Collection<Location> locations){
+    public Collection<LocationDtoResponse> mapToDto(Collection<Location> locations) {
 
         List<LocationDtoResponse> locationDtoRequests = new ArrayList<>();
 
-        for(Location location : locations){
+        for (Location location : locations) {
             locationDtoRequests.add(mapToDto(location));
         }
-       return locationDtoRequests;
-   }
+        return locationDtoRequests;
+    }
 
-   public LocationDtoResponse mapToDto(LocationCreateDto locationCreateDto){
+    public LocationDtoResponse mapToDto(LocationCreateDto locationCreateDto) {
 
-       LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
+        LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
 
-       locationDtoRequest.setId(locationDtoRequest.getId());
+        locationDtoRequest.setId(locationDtoRequest.getId());
         locationDtoRequest.setName(locationCreateDto.getName());
         locationDtoRequest.setPostalCode(locationCreateDto.getPostalCode());
 
         return locationDtoRequest;
-   }
+    }
 }

@@ -1,7 +1,6 @@
 package com.agency04.devcademy.dto.mapper;
 
 import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.response.LocationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -18,14 +16,15 @@ public class AccommodationMapper {
     @Autowired
     private LocationMapper locationMapper;
 
-    public AccommodationDtoResponse mapToDto(Accommodation accommodation, Location location){
+    public AccommodationDtoResponse mapToDto(Accommodation accommodation) {
 
         AccommodationDtoResponse accommodationCreateDtoRequest = new AccommodationDtoResponse();
-        LocationDtoResponse locationDtoResponse = locationMapper.mapToDto(location);
+        LocationDtoResponse locationDtoResponse = locationMapper.mapToDto(accommodation.getLocation());
 
         accommodationCreateDtoRequest.setId(accommodation.getId());
         accommodationCreateDtoRequest.setTitle(accommodation.getTitle());
         accommodationCreateDtoRequest.setSubtitle(accommodation.getSubtitle());
+        accommodationCreateDtoRequest.setDescription(accommodation.getDescription());
         accommodationCreateDtoRequest.setCategorization(accommodation.getCategorization());
         accommodationCreateDtoRequest.setPersonCount(accommodation.getPersonCount());
         accommodationCreateDtoRequest.setImageUrl(accommodation.getImageUrl());
@@ -38,23 +37,25 @@ public class AccommodationMapper {
     }
 
 
-   public Collection<AccommodationDtoResponse> mapToDto(Collection<Accommodation> accommodations, Collection<Location> location){
+    public List<AccommodationDtoResponse> mapToDto(List<Accommodation> accommodations) {
 
         List<AccommodationDtoResponse> accommodationCreateDtoRequest = new ArrayList<>();
 
-       for (int i = 0; i < accommodations.size(); i++) {
-           accommodationCreateDtoRequest.add(mapToDto(accommodations.stream().toList().get(i), location.stream().toList().get(i)));
-       }
-       return accommodationCreateDtoRequest;
-   }
+        for (Accommodation accommodation : accommodations) {
+            accommodationCreateDtoRequest.add(mapToDto(accommodation));
+        }
 
-   public AccommodationCreateDto mapToDto(AccommodationCreateDto accommodationCreateDto){
+        return accommodationCreateDtoRequest;
+    }
 
-       AccommodationCreateDto accommodation = new AccommodationCreateDto();
+    public AccommodationCreateDto mapToDto(AccommodationCreateDto accommodationCreateDto) {
+
+        AccommodationCreateDto accommodation = new AccommodationCreateDto();
 
         accommodation.setId(accommodation.getId());
         accommodation.setTitle(accommodationCreateDto.getTitle());
         accommodation.setSubtitle(accommodationCreateDto.getSubtitle());
+        accommodation.setDescription(accommodation.getDescription());
         accommodation.setCategorization(accommodationCreateDto.getCategorization());
         accommodation.setPersonCount(accommodationCreateDto.getPersonCount());
         accommodation.setImageUrl(accommodationCreateDto.getImageUrl());
@@ -64,5 +65,5 @@ public class AccommodationMapper {
         accommodation.setLocation(accommodationCreateDto.getLocation());
 
         return accommodation;
-   }
+    }
 }

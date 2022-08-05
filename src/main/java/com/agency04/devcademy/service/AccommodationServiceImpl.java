@@ -5,25 +5,27 @@ import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.AccommodationRepository;
+import com.agency04.devcademy.repositories.LocationRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Primary
 @Service("accommodationServiceImpl")
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;
 
-    public AccommodationServiceImpl(AccommodationRepository accommodationRepository) {
+    private final LocationRepository locationRepository;
+
+    public AccommodationServiceImpl(AccommodationRepository accommodationRepository, LocationRepository locationRepository) {
         this.accommodationRepository = accommodationRepository;
+        this.locationRepository = locationRepository;
     }
 
     @Override
-    public Optional<Accommodation> getById(Long id) {
-        return accommodationRepository.findById(id);
+    public Accommodation getById(Long id) {
+        return accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
     }
 
     @Override
@@ -31,16 +33,19 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         Accommodation accommodation = new Accommodation();
         accommodation.mapFrom(accommodationCreateDto);
+
+        locationRepository.save(accommodation.getLocation());
+
         return accommodationRepository.save(accommodation);
     }
 
     @Override
-    public Collection<Accommodation> addAll(Collection<Accommodation> accommodations) {
+    public List<Accommodation> addAll(List<Accommodation> accommodations) {
         return accommodationRepository.saveAll(accommodations);
     }
 
     @Override
-    public Collection<Accommodation> getAll() {
+    public List<Accommodation> getAll() {
         return accommodationRepository.findAll();
     }
 
@@ -49,6 +54,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         Accommodation accommodation = accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
         accommodation.mapFrom(accommodationUpdateDto);
 
+        locationRepository.save(accommodation.getLocation());
         accommodationRepository.save(accommodation);
 
         return accommodation;

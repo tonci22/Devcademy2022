@@ -26,22 +26,22 @@ public class LocationController {
 
 
     @GetMapping
-    public ResponseEntity<Collection<LocationDtoResponse>> getLocation(){
+    public ResponseEntity<Collection<LocationDtoResponse>> getLocation() {
         return ResponseEntity.ok(locationMapper.mapToDto(locationService.getAll()));
     }
 
     @PostMapping
-    public ResponseEntity<LocationDtoResponse> createLocation(@RequestBody LocationCreateDto locationCreateDto){
+    public ResponseEntity<LocationDtoResponse> createLocation(@RequestBody LocationCreateDto locationCreateDto) {
         return ResponseEntity.ok(locationMapper.mapToDto(locationService.add(locationCreateDto)));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<LocationDtoResponse> updateLocation(@RequestBody LocationUpdateDto locationUpdateDto, @PathVariable("id") Long id){
+    public ResponseEntity<LocationDtoResponse> updateLocation(@RequestBody LocationUpdateDto locationUpdateDto, @PathVariable("id") Long id) {
         return ResponseEntity.ok(locationMapper.mapToDto(locationService.updateLocation(id, locationUpdateDto)));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteLocation(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteLocation(@PathVariable("id") Long id) {
         locationService.deleteById(id);
         return ResponseEntity.ok().build();
     }
