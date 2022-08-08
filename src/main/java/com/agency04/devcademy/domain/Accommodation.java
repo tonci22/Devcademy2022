@@ -192,7 +192,7 @@ public class Accommodation {
         Location location = new Location();
         location.setId(accommodationUpdateDto.getLocation().getId());
         location.setTitle(accommodationUpdateDto.getLocation().getTitle());
-        location.setSubtitle(accommodationUpdateDto.getSubtitle());
+        location.setSubtitle(accommodationUpdateDto.getLocation().getSubtitle());
         location.setPostalCode(accommodationUpdateDto.getLocation().getPostalCode());
         return location;
     }
