@@ -18,7 +18,8 @@ public class LocationMapper {
         LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
 
         locationDtoRequest.setId(location.getId());
-        locationDtoRequest.setName(location.getName());
+        locationDtoRequest.setTitle(location.getTitle());
+        locationDtoRequest.setSubtitle(location.getSubtitle());
         locationDtoRequest.setPostalCode(location.getPostalCode());
 
         return locationDtoRequest;
@@ -38,8 +39,9 @@ public class LocationMapper {
 
         LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
 
-        locationDtoRequest.setId(locationDtoRequest.getId());
-        locationDtoRequest.setName(locationCreateDto.getName());
+        locationDtoRequest.setId(locationCreateDto.getId());
+        locationDtoRequest.setTitle(locationCreateDto.getTitle());
+        locationDtoRequest.setSubtitle(locationCreateDto.getSubtitle());
         locationDtoRequest.setPostalCode(locationCreateDto.getPostalCode());
 
         return locationDtoRequest;

@@ -19,14 +19,13 @@ public class AccommodationController {
 
     private final AccommodationService accommodationService;
 
-    private final LocationService locationService;
 
     @Autowired
     private AccommodationMapper accommodationMapper;
 
-    public AccommodationController(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService, @Qualifier("locationServiceImpl") LocationService locationService) {
+    public AccommodationController(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService) {
         this.accommodationService = accommodationService;
-        this.locationService = locationService;
+
     }
 
     @GetMapping

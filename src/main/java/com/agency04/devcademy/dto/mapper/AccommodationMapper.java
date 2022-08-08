@@ -4,6 +4,7 @@ import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.response.LocationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.response.ReservationDtoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,14 @@ public class AccommodationMapper {
     @Autowired
     private LocationMapper locationMapper;
 
+    @Autowired
+    private ReservationMapper reservationMapper;
+
     public AccommodationDtoResponse mapToDto(Accommodation accommodation) {
 
         AccommodationDtoResponse accommodationCreateDtoRequest = new AccommodationDtoResponse();
         LocationDtoResponse locationDtoResponse = locationMapper.mapToDto(accommodation.getLocation());
+        List<ReservationDtoResponse> reservationResponse =  reservationMapper.mapToDtoAccommodation(accommodation.getReservations());
 
         accommodationCreateDtoRequest.setId(accommodation.getId());
         accommodationCreateDtoRequest.setTitle(accommodation.getTitle());
@@ -32,6 +37,7 @@ public class AccommodationMapper {
         accommodationCreateDtoRequest.setPrice(accommodation.getPrice());
         accommodationCreateDtoRequest.setType(accommodation.getType());
         accommodationCreateDtoRequest.setLocation(locationDtoResponse);
+        accommodationCreateDtoRequest.setReservation(reservationResponse);
 
         return accommodationCreateDtoRequest;
     }

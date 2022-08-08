@@ -4,22 +4,23 @@ import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "postalCode"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "postalCode"})})
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 100)
+    private String title;
     @Size(max = 150)
-    private String name;
+    private String subtitle;
+    @Max(5)
     private Integer postalCode;
-
-
     @OneToOne
     @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;
@@ -27,15 +28,10 @@ public class Location {
     public Location() {
     }
 
-    public Location(String name, Integer postalCode) {
-        this.name = name;
+    public Location(String title, String subtitle, Integer postalCode) {
+        this.title = title;
+        this.subtitle = subtitle;
         this.postalCode = postalCode;
-    }
-
-    public Location(String name, Integer postalCode, Accommodation accommodation) {
-        this.name = name;
-        this.postalCode = postalCode;
-        this.accommodation = accommodation;
     }
 
     public Long getId() {
@@ -50,12 +46,12 @@ public class Location {
         this.accommodation = accommodation;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getPostalCode() {
@@ -70,21 +66,32 @@ public class Location {
         this.id = id;
     }
 
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
     public void mapFrom(LocationCreateDto locationCreateDto) {
         this.setId(locationCreateDto.getId());
-        this.setName(locationCreateDto.getName());
+        this.setTitle(locationCreateDto.getTitle());
+        this.setSubtitle(locationCreateDto.getSubtitle());
         this.setPostalCode(locationCreateDto.getPostalCode());
     }
 
     public void mapFrom(LocationUpdateDto locationUpdateDto, Long id) {
         this.setId(id);
-        this.setName(locationUpdateDto.getName());
+        this.setTitle(locationUpdateDto.getTitle());
+        this.setSubtitle(locationUpdateDto.getSubtitle());
         this.setPostalCode(locationUpdateDto.getPostalCode());
     }
 
     public void mapFrom(LocationUpdateDto locationUpdateDto) {
         this.setId(locationUpdateDto.getId());
-        this.setName(locationUpdateDto.getName());
+        this.setTitle(locationUpdateDto.getTitle());
+        this.setSubtitle(locationUpdateDto.getSubtitle());
         this.setPostalCode(locationUpdateDto.getPostalCode());
     }
 }

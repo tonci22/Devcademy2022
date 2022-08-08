@@ -5,7 +5,6 @@ import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AccommodationService {
     Accommodation getById(Long id);

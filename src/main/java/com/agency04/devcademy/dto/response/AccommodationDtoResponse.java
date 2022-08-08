@@ -3,6 +3,7 @@ package com.agency04.devcademy.dto.response;
 import com.agency04.devcademy.enums.AccommodationType;
 
 
+import java.util.List;
 import java.util.Objects;
 
 public class AccommodationDtoResponse {
@@ -18,6 +19,7 @@ public class AccommodationDtoResponse {
     private double price;
     private AccommodationType type;
     private LocationDtoResponse location;
+    private List<ReservationDtoResponse> reservation;
 
     public AccommodationDtoResponse() {
     }
@@ -117,6 +119,14 @@ public class AccommodationDtoResponse {
 
     public void setLocation(LocationDtoResponse location) {
         this.location = location;
+    }
+
+    public List<ReservationDtoResponse> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(List<ReservationDtoResponse> reservation) {
+        this.reservation = reservation;
     }
 
     @Override

@@ -4,14 +4,16 @@ package com.agency04.devcademy.dto.request;
 public class LocationCreateDto {
 
     private Long id;
-    private String name;
+    private String title;
+    private String subtitle;
     private Integer postalCode;
 
     public LocationCreateDto() {
     }
 
-    public LocationCreateDto(String name, Integer postalCode) {
-        this.name = name;
+    public LocationCreateDto(String title, String subtitle, Integer postalCode) {
+        this.title = title;
+        this.subtitle = subtitle;
         this.postalCode = postalCode;
     }
 
@@ -23,12 +25,20 @@ public class LocationCreateDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public Integer getPostalCode() {

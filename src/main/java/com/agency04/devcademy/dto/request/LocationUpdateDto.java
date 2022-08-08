@@ -1,19 +1,19 @@
 package com.agency04.devcademy.dto.request;
 
-import javax.validation.constraints.Size;
-
 public class LocationUpdateDto {
 
     private Long id;
-    @Size(max = 150)
-    private String name;
+
+    private String title;
+    private String subtitle;
     private Integer postalCode;
 
     public LocationUpdateDto() {
     }
 
-    public LocationUpdateDto(String name, Integer postalCode) {
-        this.name = name;
+    public LocationUpdateDto(String title, String subtitle, Integer postalCode) {
+        this.title = title;
+        this.subtitle = subtitle;
         this.postalCode = postalCode;
     }
 
@@ -25,12 +25,20 @@ public class LocationUpdateDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public Integer getPostalCode() {
