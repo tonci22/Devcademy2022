@@ -1,11 +1,8 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
-import com.agency04.devcademy.dto.request.LocationCreateDto;
-import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +39,4 @@ public class MobileHomeAccommodationService implements AccommodationService{
     public void deleteById(Long id) {
 
     }
-
 }

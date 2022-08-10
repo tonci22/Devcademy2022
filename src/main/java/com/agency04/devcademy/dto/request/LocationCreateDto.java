@@ -1,14 +1,13 @@
 package com.agency04.devcademy.dto.request;
 
 
-import java.util.List;
-
 public class LocationCreateDto {
 
+    private Long id;
     private String title;
     private String subtitle;
     private Integer postalCode;
-    private List<AccommodationCreateDto> accommodation;
+
     public LocationCreateDto() {
     }
 
@@ -16,6 +15,14 @@ public class LocationCreateDto {
         this.title = title;
         this.subtitle = subtitle;
         this.postalCode = postalCode;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -40,13 +47,5 @@ public class LocationCreateDto {
 
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
-    }
-
-    public List<AccommodationCreateDto> getAccommodation() {
-        return accommodation;
-    }
-
-    public void setAccommodation(List<AccommodationCreateDto> accommodation) {
-        this.accommodation = accommodation;
     }
 }

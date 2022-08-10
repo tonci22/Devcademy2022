@@ -17,6 +17,8 @@ public class AccommodationUpdateDto {
     private double price;
     private AccommodationType type;
 
+    private LocationUpdateDto location;
+    private List<ReservationUpdateDto> reservation;
 
     public AccommodationUpdateDto() {
     }
@@ -102,7 +104,21 @@ public class AccommodationUpdateDto {
         this.type = type;
     }
 
+    public LocationUpdateDto getLocation() {
+        return location;
+    }
 
+    public void setLocation(LocationUpdateDto location) {
+        this.location = location;
+    }
+
+    public List<ReservationUpdateDto> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(List<ReservationUpdateDto> reservation) {
+        this.reservation = reservation;
+    }
 
     @Override
     public boolean equals(Object o) {

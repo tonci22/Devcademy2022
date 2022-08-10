@@ -2,7 +2,9 @@ package com.agency04.devcademy.dto.mapper;
 
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
+import com.agency04.devcademy.dto.response.LocationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.response.ReservationDtoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +14,17 @@ import java.util.List;
 @Component
 public class AccommodationMapper {
 
+    @Autowired
+    private LocationMapper locationMapper;
+
+    @Autowired
+    private ReservationMapper reservationMapper;
+
     public AccommodationDtoResponse mapToDto(Accommodation accommodation) {
 
         AccommodationDtoResponse accommodationCreateDtoRequest = new AccommodationDtoResponse();
+        LocationDtoResponse locationDtoResponse = locationMapper.mapToDto(accommodation.getLocation());
+        List<ReservationDtoResponse> reservationResponse =  reservationMapper.mapToDtoAccommodation(accommodation.getReservations());
 
         accommodationCreateDtoRequest.setId(accommodation.getId());
         accommodationCreateDtoRequest.setTitle(accommodation.getTitle());
@@ -26,6 +36,8 @@ public class AccommodationMapper {
         accommodationCreateDtoRequest.setFreeCancelation(accommodation.isFreeCancelation());
         accommodationCreateDtoRequest.setPrice(accommodation.getPrice());
         accommodationCreateDtoRequest.setType(accommodation.getType());
+        accommodationCreateDtoRequest.setLocation(locationDtoResponse);
+        accommodationCreateDtoRequest.setReservation(reservationResponse);
 
         return accommodationCreateDtoRequest;
     }
@@ -42,58 +54,22 @@ public class AccommodationMapper {
         return accommodationCreateDtoRequest;
     }
 
-    public AccommodationCreateDto mapToDtoAccommodation(Accommodation accommodation) {
+    public AccommodationCreateDto mapToDto(AccommodationCreateDto accommodationCreateDto) {
 
-        AccommodationCreateDto accommodationCreateDto = new AccommodationCreateDto();
+        AccommodationCreateDto accommodation = new AccommodationCreateDto();
 
-        accommodationCreateDto.setTitle(accommodation.getTitle());
-        accommodationCreateDto.setSubtitle(accommodation.getSubtitle());
-        accommodationCreateDto.setDescription(accommodation.getDescription());
-        accommodationCreateDto.setCategorization(accommodation.getCategorization());
-        accommodationCreateDto.setPersonCount(accommodation.getPersonCount());
-        accommodationCreateDto.setImageUrl(accommodation.getImageUrl());
-        accommodationCreateDto.setFreeCancelation(accommodation.isFreeCancelation());
-        accommodationCreateDto.setPrice(accommodation.getPrice());
-        accommodationCreateDto.setType(accommodation.getType());
-
-        return accommodationCreateDto;
-    }
-
-    public Accommodation mapToDtoAccommodation(AccommodationCreateDto accommodationCreateDto) {
-
-        Accommodation accommodation = new Accommodation();
-
+        accommodation.setId(accommodation.getId());
         accommodation.setTitle(accommodationCreateDto.getTitle());
         accommodation.setSubtitle(accommodationCreateDto.getSubtitle());
-        accommodation.setDescription(accommodationCreateDto.getDescription());
+        accommodation.setDescription(accommodation.getDescription());
         accommodation.setCategorization(accommodationCreateDto.getCategorization());
         accommodation.setPersonCount(accommodationCreateDto.getPersonCount());
         accommodation.setImageUrl(accommodationCreateDto.getImageUrl());
         accommodation.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
         accommodation.setPrice(accommodationCreateDto.getPrice());
         accommodation.setType(accommodationCreateDto.getType());
+        accommodation.setLocation(accommodationCreateDto.getLocation());
 
         return accommodation;
-    }
-    public List<Accommodation> mapToDtoAccommodationCreate(List<AccommodationCreateDto> accommodations) {
-
-        List<Accommodation> accommodationCreateDtoRequest = new ArrayList<>();
-
-        for (AccommodationCreateDto accommodation : accommodations) {
-            accommodationCreateDtoRequest.add(mapToDtoAccommodation(accommodation));
-        }
-
-        return accommodationCreateDtoRequest;
-    }
-
-    public List<AccommodationDtoResponse> mapToDtoAccommodation(List<Accommodation> accommodations) {
-
-        List<AccommodationDtoResponse> accommodationCreateDtoRequest = new ArrayList<>();
-
-        for (Accommodation accommodation : accommodations) {
-            accommodationCreateDtoRequest.add(mapToDto(accommodation));
-        }
-
-        return accommodationCreateDtoRequest;
     }
 }

@@ -1,17 +1,21 @@
 package com.agency04.devcademy.dto.response;
 
+import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.enums.ReservationType;
 
 import java.sql.Timestamp;
 
 public class ReservationDtoResponse {
-
     private Long id;
-    private ReservationType type;
+
+    private ReservationType reservationType;
+
     private Timestamp checkIn;
     private Timestamp checkOut;
     private Integer personCount;
     private boolean submitted;
+
+    //private Users users;
 
     public Long getId() {
         return id;
@@ -21,12 +25,12 @@ public class ReservationDtoResponse {
         this.id = id;
     }
 
-    public ReservationType getType() {
-        return type;
+    public ReservationType getReservationType() {
+        return reservationType;
     }
 
-    public void setType(ReservationType type) {
-        this.type = type;
+    public void setReservationType(ReservationType reservationType) {
+        this.reservationType = reservationType;
     }
 
     public Timestamp getCheckIn() {

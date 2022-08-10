@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class AccommodationCreateDto {
 
+    private Long id;
     private String title;
     private String subtitle;
     private String description;
@@ -16,6 +17,9 @@ public class AccommodationCreateDto {
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
+
+    private LocationCreateDto location;
+    private List<ReservationCreateDto> reservation;
 
     public AccommodationCreateDto() {
     }
@@ -29,6 +33,13 @@ public class AccommodationCreateDto {
         this.imageUrl = imageUrl;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -102,7 +113,21 @@ public class AccommodationCreateDto {
         this.type = type;
     }
 
+    public LocationCreateDto getLocation() {
+        return location;
+    }
 
+    public void setLocation(LocationCreateDto location) {
+        this.location = location;
+    }
+
+    public List<ReservationCreateDto> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(List<ReservationCreateDto> reservation) {
+        this.reservation = reservation;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -2,6 +2,8 @@ package com.agency04.devcademy.domain;
 
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.ReservationCreateDto;
+import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 
 import javax.persistence.*;
@@ -34,12 +36,13 @@ public class Accommodation {
     private double price;
     private AccommodationType type;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @OneToMany
-    private List<Reservation> reservations;
-
+    @JoinColumn(name = "reservations_id")
+    private List<Reservation> reservations = new ArrayList<>();
 
     public Accommodation() {
     }
@@ -138,6 +141,14 @@ public class Accommodation {
         this.type = type;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
 
         this.setTitle(accommodationUpdateDto.getTitle());
@@ -149,6 +160,9 @@ public class Accommodation {
         this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
         this.setPrice(accommodationUpdateDto.getPrice());
         this.setType(accommodationUpdateDto.getType());
+        this.setLocation(mapDtoToLocation(accommodationUpdateDto));
+        this.setReservations(mapDtoToReservationUpdate(accommodationUpdateDto.getReservation()));
+
     }
 
     public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
@@ -162,6 +176,71 @@ public class Accommodation {
         this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
         this.setPrice(accommodationCreateDto.getPrice());
         this.setType(accommodationCreateDto.getType());
+        this.setLocation(mapDtoToLocation(accommodationCreateDto));
+        this.setReservations(mapDtoToReservationCreate(accommodationCreateDto.getReservation()));
+    }
+
+    private Location mapDtoToLocation(AccommodationCreateDto accommodationCreateDto) {
+        Location location = new Location();
+        location.setId(accommodationCreateDto.getLocation().getId());
+        location.setTitle(accommodationCreateDto.getLocation().getTitle());
+        location.setSubtitle(accommodationCreateDto.getSubtitle());
+        location.setPostalCode(accommodationCreateDto.getLocation().getPostalCode());
+        return location;
+    }
+    private Location mapDtoToLocation(AccommodationUpdateDto accommodationUpdateDto) {
+        Location location = new Location();
+        location.setId(accommodationUpdateDto.getLocation().getId());
+        location.setTitle(accommodationUpdateDto.getLocation().getTitle());
+        location.setSubtitle(accommodationUpdateDto.getLocation().getSubtitle());
+        location.setPostalCode(accommodationUpdateDto.getLocation().getPostalCode());
+        return location;
+    }
+
+    private Reservation mapDtoToReservationCreate(ReservationCreateDto reservationCreateDto){
+        Reservation reservation = new Reservation();
+
+        reservation.setId(reservationCreateDto.getId());
+        reservation.setAccommodation(reservationCreateDto.getAccommodation());
+        reservation.setReservationType(reservationCreateDto.getReservationType());
+        reservation.setSubmitted(reservationCreateDto.isSubmitted());
+        reservation.setCheckOut(reservationCreateDto.getCheckOut());
+        reservation.setCheckIn(reservationCreateDto.getCheckIn());
+        reservation.setPersonCount(reservationCreateDto.getPersonCount());
+        return reservation;
+    }
+
+    private Reservation mapDtoToReservationUpdate(ReservationUpdateDto reservationUpdateDto){
+        Reservation reservation = new Reservation();
+
+        reservation.setId(reservationUpdateDto.getId());
+        reservation.setAccommodation(reservationUpdateDto.getAccommodation());
+        reservation.setReservationType(reservationUpdateDto.getReservationType());
+        reservation.setSubmitted(reservationUpdateDto.isSubmitted());
+        reservation.setCheckOut(reservationUpdateDto.getCheckOut());
+        reservation.setCheckIn(reservationUpdateDto.getCheckIn());
+        reservation.setPersonCount(reservationUpdateDto.getPersonCount());
+        return reservation;
+    }
+
+    private List<Reservation> mapDtoToReservationUpdate(List<ReservationUpdateDto> reservationUpdateDto){
+        List<Reservation> reservation = new ArrayList<>();
+
+        for(ReservationUpdateDto reservationUpdateDto1 : reservationUpdateDto){
+            reservation.add(mapDtoToReservationUpdate(reservationUpdateDto1));
+        }
+
+        return reservation;
+    }
+
+    private List<Reservation> mapDtoToReservationCreate(List<ReservationCreateDto> reservationCreateDtos){
+        List<Reservation> reservation = new ArrayList<>();
+
+        for(ReservationCreateDto tempReservation : reservationCreateDtos){
+            reservation.add(mapDtoToReservationCreate(tempReservation));
+        }
+
+        return reservation;
     }
 
     @Override

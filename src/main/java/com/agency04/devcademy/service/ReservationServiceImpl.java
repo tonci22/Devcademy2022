@@ -1,5 +1,6 @@
 package com.agency04.devcademy.service;
 
+
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.dto.mapper.ReservationMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
@@ -9,11 +10,11 @@ import com.agency04.devcademy.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
+public class ReservationServiceImpl implements ReservationService {
+
     private final ReservationRepository reservationRepository;
 
     @Autowired
@@ -24,18 +25,12 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation add(ReservationCreateDto reservationCreateDto) {
-        return reservationRepository.save(reservationMapper.mapDtoTo(reservationCreateDto));
+    public Reservation add(ReservationCreateDto reservation) {
+        return reservationRepository.save(reservationMapper.mapToDto(reservation));
     }
 
     @Override
-    public List<Reservation> addAll(List<ReservationCreateDto> reservationCreateDtos) {
-        List<Reservation> reservations = new ArrayList<>();
-
-        for (ReservationCreateDto reservationCreateDto : reservationCreateDtos){
-            reservations.add(reservationMapper.mapDtoTo(reservationCreateDto));
-        }
-
+    public List<Reservation> addAll(List<Reservation> reservations) {
         return reservationRepository.saveAll(reservations);
     }
 
@@ -45,20 +40,15 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation updateReservation(Long id, ReservationUpdateDto reservationUpdateDto) {
-        reservationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reservation id not found"));
-
-        return reservationRepository.save(reservationMapper.mapDtoTo(id, reservationUpdateDto));
-    }
-
-    @Override
-    public Reservation getById(Long id) {
-        return reservationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reservation id not found"));
+    public Reservation updateReservation(Long id, ReservationUpdateDto reservation) {
+        reservationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reservation not found"));
+        Reservation tempReservation = reservationMapper.mapToDto(reservation);
+        return reservationRepository.save(tempReservation);
     }
 
     @Override
     public void deleteById(Long id) {
-        reservationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reservation id not found"));
+        reservationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reservation not found"));
         reservationRepository.deleteById(id);
     }
 }
