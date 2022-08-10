@@ -18,8 +18,6 @@ public class AccommodationDtoResponse {
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
-    private LocationDtoResponse location;
-    private List<ReservationDtoResponse> reservation;
 
     public AccommodationDtoResponse() {
     }
@@ -113,21 +111,6 @@ public class AccommodationDtoResponse {
         this.type = type;
     }
 
-    public LocationDtoResponse getLocation() {
-        return location;
-    }
-
-    public void setLocation(LocationDtoResponse location) {
-        this.location = location;
-    }
-
-    public List<ReservationDtoResponse> getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(List<ReservationDtoResponse> reservation) {
-        this.reservation = reservation;
-    }
 
     @Override
     public boolean equals(Object o) {

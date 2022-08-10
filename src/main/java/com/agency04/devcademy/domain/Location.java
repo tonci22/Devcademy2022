@@ -6,6 +6,8 @@ import com.agency04.devcademy.dto.request.LocationUpdateDto;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "postalCode"})})
@@ -21,9 +23,8 @@ public class Location {
     private String subtitle;
     @Max(5)
     private Integer postalCode;
-    @OneToOne
-    @JoinColumn(name = "accommodation_id")
-    private Accommodation accommodation;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Accommodation> accommodations = new ArrayList<>();
 
     public Location() {
     }
@@ -38,12 +39,12 @@ public class Location {
         return id;
     }
 
-    public Accommodation getAccommodation() {
-        return accommodation;
+    public List<Accommodation> getAccommodations() {
+        return accommodations;
     }
 
-    public void setAccommodation(Accommodation accommodation) {
-        this.accommodation = accommodation;
+    public void setAccommodations(List<Accommodation> accommodations) {
+        this.accommodations = accommodations;
     }
 
     public String getTitle() {
@@ -75,7 +76,6 @@ public class Location {
     }
 
     public void mapFrom(LocationCreateDto locationCreateDto) {
-        this.setId(locationCreateDto.getId());
         this.setTitle(locationCreateDto.getTitle());
         this.setSubtitle(locationCreateDto.getSubtitle());
         this.setPostalCode(locationCreateDto.getPostalCode());
@@ -88,10 +88,12 @@ public class Location {
         this.setPostalCode(locationUpdateDto.getPostalCode());
     }
 
-    public void mapFrom(LocationUpdateDto locationUpdateDto) {
+    public Location mapFrom(LocationUpdateDto locationUpdateDto) {
         this.setId(locationUpdateDto.getId());
         this.setTitle(locationUpdateDto.getTitle());
         this.setSubtitle(locationUpdateDto.getSubtitle());
         this.setPostalCode(locationUpdateDto.getPostalCode());
+
+        return this;
     }
 }
