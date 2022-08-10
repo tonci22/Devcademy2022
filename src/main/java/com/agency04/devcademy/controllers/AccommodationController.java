@@ -5,7 +5,6 @@ import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.service.AccommodationService;
-import com.agency04.devcademy.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +18,11 @@ public class AccommodationController {
 
     private final AccommodationService accommodationService;
 
-
     @Autowired
     private AccommodationMapper accommodationMapper;
 
     public AccommodationController(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService) {
         this.accommodationService = accommodationService;
-
     }
 
     @GetMapping
@@ -46,6 +43,6 @@ public class AccommodationController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteAccommodation(@PathVariable("id") Long id) {
         accommodationService.deleteById(id);
-        return ResponseEntity.ok("DELETED");
+        return ResponseEntity.ok("DELETED ACCOMMODATION");
     }
 }
