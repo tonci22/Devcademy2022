@@ -12,67 +12,60 @@ import java.util.List;
 @Component
 public class ReservationMapper {
 
-    public Reservation mapToDto(ReservationCreateDto reservationCreateDto){
-
+    public Reservation mapDtoTo(ReservationCreateDto reservationCreateDto){
         Reservation reservation = new Reservation();
-
-        reservation.setId(reservationCreateDto.getId());
-        reservation.setReservationType(reservationCreateDto.getReservationType());
-        reservation.setAccommodation(reservationCreateDto.getAccommodation());
-        reservation.setCheckIn(reservationCreateDto.getCheckIn());
-        reservation.setSubmitted(reservationCreateDto.isSubmitted());
-        reservation.setCheckOut(reservationCreateDto.getCheckOut());
+        reservation.setType(reservationCreateDto.getType());
         reservation.setPersonCount(reservationCreateDto.getPersonCount());
+        reservation.setCheckIn(reservationCreateDto.getCheckIn());
+        reservation.setCheckOut(reservationCreateDto.getCheckOut());
+        reservation.setSubmitted(reservationCreateDto.isSubmitted());
 
         return reservation;
     }
 
-    public ReservationDtoResponse mapToDto(Reservation reservationResponse){
-
-        ReservationDtoResponse reservation = new ReservationDtoResponse();
-
-        reservation.setId(reservationResponse.getId());
-        reservation.setReservationType(reservationResponse.getReservationType());
-        reservation.setCheckIn(reservationResponse.getCheckIn());
-        reservation.setSubmitted(reservationResponse.isSubmitted());
-        reservation.setCheckOut(reservationResponse.getCheckOut());
-        reservation.setPersonCount(reservationResponse.getPersonCount());
-
-        return reservation;
-    }
-
-    public List<Reservation> mapToDto(List<ReservationCreateDto> reservationCreateDtos){
-        List<Reservation> reservations = new ArrayList<>();
-
-        for (ReservationCreateDto reservation : reservationCreateDtos) {
-            reservations.add(mapToDto(reservation));
-        }
-        return reservations;
-    }
-
-    public List<ReservationDtoResponse> mapToDtoAccommodation(List<Reservation> accommodations){
-
-        List<ReservationDtoResponse> reservationResponses = new ArrayList<>();
-
-        for (Reservation reservation : accommodations){
-            reservationResponses.add(mapToDto(reservation));
-        }
-
-        return reservationResponses;
-    }
-
-    public Reservation mapToDto(ReservationUpdateDto reservationUpdateDto){
-
+    public Reservation mapDtoTo(Long id, ReservationUpdateDto reservationUpdateDto){
         Reservation reservation = new Reservation();
-
-        reservation.setId(reservationUpdateDto.getId());
-        reservation.setReservationType(reservationUpdateDto.getReservationType());
-        reservation.setAccommodation(reservationUpdateDto.getAccommodation());
-        reservation.setCheckIn(reservationUpdateDto.getCheckIn());
-        reservation.setSubmitted(reservationUpdateDto.isSubmitted());
-        reservation.setCheckOut(reservationUpdateDto.getCheckOut());
+        reservation.setId(id);
+        reservation.setType(reservationUpdateDto.getType());
         reservation.setPersonCount(reservationUpdateDto.getPersonCount());
+        reservation.setCheckIn(reservationUpdateDto.getCheckIn());
+        reservation.setCheckOut(reservationUpdateDto.getCheckOut());
+        reservation.setSubmitted(reservationUpdateDto.isSubmitted());
 
         return reservation;
+    }
+
+    public ReservationDtoResponse mapDtoTo(Reservation reservation){
+        ReservationDtoResponse reservationDtoResponse = new ReservationDtoResponse();
+        reservationDtoResponse.setId(reservation.getId());
+        reservationDtoResponse.setType(reservation.getType());
+        reservationDtoResponse.setPersonCount(reservation.getPersonCount());
+        reservationDtoResponse.setCheckIn(reservation.getCheckIn());
+        reservationDtoResponse.setCheckOut(reservation.getCheckOut());
+        reservationDtoResponse.setSubmitted(reservation.isSubmitted());
+
+        return reservationDtoResponse;
+    }
+
+    public ReservationCreateDto mapDtoToReservation(Reservation reservation){
+        ReservationCreateDto reservationDtoResponse = new ReservationCreateDto();
+
+        reservationDtoResponse.setType(reservation.getType());
+        reservationDtoResponse.setPersonCount(reservation.getPersonCount());
+        reservationDtoResponse.setCheckIn(reservation.getCheckIn());
+        reservationDtoResponse.setCheckOut(reservation.getCheckOut());
+        reservationDtoResponse.setSubmitted(reservation.isSubmitted());
+
+        return reservationDtoResponse;
+    }
+
+    public List<ReservationDtoResponse> mapDtoTo(List<Reservation> reservations){
+        List<ReservationDtoResponse> reservationDtoResponse = new ArrayList<>();
+
+        for (Reservation reservation : reservations){
+            reservationDtoResponse.add(mapDtoTo(reservation));
+        }
+
+        return reservationDtoResponse;
     }
 }

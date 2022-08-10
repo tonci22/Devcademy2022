@@ -1,6 +1,8 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Location;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
@@ -27,4 +29,11 @@ public interface LocationService {
     void deleteById(Long id);
 
     void deleteAll();
+
+    Location addAccommodation(Long id, AccommodationCreateDto accommodationCreateDto);
+    Location addAccommodation(Long id, List<AccommodationCreateDto> accommodationCreateDto);
+
+    Location updateAccommodation(Long idLocation, Long idAccommodation, AccommodationUpdateDto accommodationUpdateDto);
+    void deleteById(Long idLocation, Long idAccommodation);
+
 }
