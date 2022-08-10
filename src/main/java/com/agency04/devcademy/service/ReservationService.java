@@ -7,10 +7,11 @@ import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import java.util.List;
 
 public interface ReservationService {
-    Reservation add(ReservationCreateDto reservationCreateDto);
-    List<Reservation> addAll(List<ReservationCreateDto> reservationCreateDtos);
+
+    Reservation add(ReservationCreateDto reservation);
+    List<Reservation> addAll(List<Reservation> reservations);
     List<Reservation> getAll();
-    Reservation updateReservation(Long id, ReservationUpdateDto reservationUpdateDto);
-    Reservation getById(Long id);
+    Reservation updateReservation(Long id, ReservationUpdateDto reservation);
+
     void deleteById(Long id);
 }
