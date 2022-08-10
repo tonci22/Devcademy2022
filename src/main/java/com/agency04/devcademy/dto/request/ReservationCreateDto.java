@@ -1,35 +1,35 @@
 package com.agency04.devcademy.dto.request;
 
-import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.enums.ReservationType;
 
 import java.sql.Timestamp;
 
 public class ReservationCreateDto {
 
-    private Long id;
-    private ReservationType reservationType;
+    private ReservationType type;
     private Timestamp checkIn;
     private Timestamp checkOut;
     private Integer personCount;
     private boolean submitted;
-    //private Users users;
-    private Accommodation accommodation;
 
-    public Long getId() {
-        return id;
+    public ReservationCreateDto(ReservationType type, Timestamp checkIn, Timestamp checkOut, Integer personCount, boolean submitted) {
+        this.type = type;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.personCount = personCount;
+        this.submitted = submitted;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ReservationCreateDto() {
+
     }
 
-    public ReservationType getReservationType() {
-        return reservationType;
+    public ReservationType getType() {
+        return type;
     }
 
-    public void setReservationType(ReservationType reservationType) {
-        this.reservationType = reservationType;
+    public void setType(ReservationType type) {
+        this.type = type;
     }
 
     public Timestamp getCheckIn() {
@@ -62,13 +62,5 @@ public class ReservationCreateDto {
 
     public void setSubmitted(boolean submitted) {
         this.submitted = submitted;
-    }
-
-    public Accommodation getAccommodation() {
-        return accommodation;
-    }
-
-    public void setAccommodation(Accommodation accommodation) {
-        this.accommodation = accommodation;
     }
 }

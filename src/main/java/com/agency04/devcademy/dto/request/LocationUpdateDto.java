@@ -1,5 +1,7 @@
 package com.agency04.devcademy.dto.request;
 
+import java.util.List;
+
 public class LocationUpdateDto {
 
     private Long id;
@@ -7,7 +9,7 @@ public class LocationUpdateDto {
     private String title;
     private String subtitle;
     private Integer postalCode;
-
+    private List<AccommodationUpdateDto> accommodation;
     public LocationUpdateDto() {
     }
 
@@ -47,5 +49,13 @@ public class LocationUpdateDto {
 
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public List<AccommodationUpdateDto> getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(List<AccommodationUpdateDto> accommodation) {
+        this.accommodation = accommodation;
     }
 }
