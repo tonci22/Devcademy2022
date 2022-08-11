@@ -1,8 +1,11 @@
 package com.agency04.devcademy.dto.request;
 
 
+import lombok.*;
+
 import java.util.List;
 
+@Data
 public class LocationCreateDto {
 
     private String title;
@@ -18,35 +21,4 @@ public class LocationCreateDto {
         this.postalCode = postalCode;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public List<AccommodationCreateDto> getAccommodations() {
-        return accommodations;
-    }
-
-    public void setAccommodations(List<AccommodationCreateDto> accommodations) {
-        this.accommodations = accommodations;
-    }
 }

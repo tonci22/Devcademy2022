@@ -4,7 +4,6 @@ import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

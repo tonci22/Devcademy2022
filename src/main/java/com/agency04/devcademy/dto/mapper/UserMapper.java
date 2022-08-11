@@ -11,8 +11,6 @@ import java.util.List;
 
 @Component
 public class UserMapper {
-
-
     public User mapToDto(UserCreateDto userCreateDto){
         User user = new User();
         user.setFirstName(userCreateDto.getFirstName());

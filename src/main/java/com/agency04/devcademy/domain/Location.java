@@ -2,6 +2,7 @@ package com.agency04.devcademy.domain;
 
 import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "postalCode"})})
 public class Location {
@@ -33,46 +35,6 @@ public class Location {
         this.title = title;
         this.subtitle = subtitle;
         this.postalCode = postalCode;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public List<Accommodation> getAccommodations() {
-        return accommodations;
-    }
-
-    public void setAccommodations(List<Accommodation> accommodations) {
-        this.accommodations = accommodations;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     public void mapFrom(LocationCreateDto locationCreateDto) {

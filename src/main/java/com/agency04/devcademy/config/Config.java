@@ -24,8 +24,6 @@ public class Config {
 
     @Bean("roomAccommodationService")
     RoomAccommodationService accommodationService() {
-
-        System.out.println("Owner:" + accommodationOwner + "\nName: " + accommodationOwnerName + "\nFacebook: " + accommodationOwnerFacebook + "\nInstagram: " + accommodationOwnerInstagram);
         return new RoomAccommodationService();
     }
 

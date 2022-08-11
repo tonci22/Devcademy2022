@@ -2,10 +2,12 @@ package com.agency04.devcademy.dto.request;
 
 import com.agency04.devcademy.domain.ReservationHistory;
 import com.agency04.devcademy.enums.ReservationType;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 
+@Data
 public class ReservationUpdateDto {
 
     private ReservationType type;
@@ -15,51 +17,4 @@ public class ReservationUpdateDto {
     private boolean submitted;
     private AccommodationUpdateDto accommodation;
 
-    public ReservationType getType() {
-        return type;
-    }
-
-    public void setType(ReservationType type) {
-        this.type = type;
-    }
-
-    public Timestamp getCheckIn() {
-        return checkIn;
-    }
-
-    public void setCheckIn(Timestamp checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public Timestamp getCheckOut() {
-        return checkOut;
-    }
-
-    public void setCheckOut(Timestamp checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public Integer getPersonCount() {
-        return personCount;
-    }
-
-    public void setPersonCount(Integer personCount) {
-        this.personCount = personCount;
-    }
-
-    public boolean isSubmitted() {
-        return submitted;
-    }
-
-    public void setSubmitted(boolean submitted) {
-        this.submitted = submitted;
-    }
-
-    public AccommodationUpdateDto getAccommodation() {
-        return accommodation;
-    }
-
-    public void setAccommodation(AccommodationUpdateDto accommodation) {
-        this.accommodation = accommodation;
-    }
 }
