@@ -57,18 +57,18 @@ public class LocationController {
 
     //accommodation
 
-    @PostMapping(value = "/{id}/accommodation")
+    @PostMapping(value = "/{id}/accommodations")
     public ResponseEntity<Location> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
         return ResponseEntity.ok(locationService.addAccommodation(id, accommodationCreateDto));
     }
 
-    @PutMapping(value = "/{id}/accommodation/{idAccommodation}")
+    @PutMapping(value = "/{id}/accommodations/{idAccommodation}")
     public ResponseEntity<Location> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody AccommodationUpdateDto accommodationUpdateDto){
         return ResponseEntity.ok(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto));
     }
 
     //todo - vratit se na ovo jer ne radi
-    @DeleteMapping(value = "/{id}/accommodation/{idAccommodation}")
+    @DeleteMapping(value = "/{id}/accommodations/{idAccommodation}")
     public ResponseEntity<String> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation){
         accommodationService.deleteById(idAccommodation);
         return ResponseEntity.ok("DELETED ACCOMMODATION");

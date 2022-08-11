@@ -1,10 +1,12 @@
 package com.agency04.devcademy;
 
+import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.dto.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.enums.ReservationType;
 import com.agency04.devcademy.service.AccommodationService;
 import com.agency04.devcademy.service.LocationService;
@@ -74,7 +76,7 @@ public class ApartmentReservationSystemApplication {
 
         userService.addAll(users);
 
-        Timestamp timestamp = new Timestamp(new Date().getTime() - random.nextInt(Integer.MAX_VALUE - 1));
+       /* Timestamp timestamp = new Timestamp(new Date().getTime() - random.nextInt(Integer.MAX_VALUE - 1));
         List<ReservationCreateDto> reservations = new ArrayList<>() {
             {
                 add(new ReservationCreateDto(ReservationType.TEMP, timestamp, new Timestamp(new Date().getTime()), 23, true));
@@ -84,7 +86,7 @@ public class ApartmentReservationSystemApplication {
         };
 
         reservationService.addAll(reservations);
-       /* List<Accommodation> accommodations = new ArrayList<>() {
+        List<Accommodation> accommodations = new ArrayList<>() {
             {
                 add(new Accommodation("titl", "subtit", "opis"));
                 add(new Accommodation("titl1", "subtit1", "opis1"));

@@ -1,6 +1,7 @@
 package com.agency04.devcademy.dto.mapper;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,22 @@ public class AccommodationMapper {
 
         return accommodationCreateDtoRequest;
     }
+    public AccommodationUpdateDto mapToDtoAccommodationUpdate(Accommodation accommodation) {
 
+        AccommodationUpdateDto accommodationUpdateDto = new AccommodationUpdateDto();
+
+        accommodationUpdateDto.setTitle(accommodation.getTitle());
+        accommodationUpdateDto.setSubtitle(accommodation.getSubtitle());
+        accommodationUpdateDto.setDescription(accommodation.getDescription());
+        accommodationUpdateDto.setCategorization(accommodation.getCategorization());
+        accommodationUpdateDto.setPersonCount(accommodation.getPersonCount());
+        accommodationUpdateDto.setImageUrl(accommodation.getImageUrl());
+        accommodationUpdateDto.setFreeCancelation(accommodation.isFreeCancelation());
+        accommodationUpdateDto.setPrice(accommodation.getPrice());
+        accommodationUpdateDto.setType(accommodation.getType());
+
+        return accommodationUpdateDto;
+    }
 
     public List<AccommodationDtoResponse> mapToDto(List<Accommodation> accommodations) {
 

@@ -1,8 +1,10 @@
 package com.agency04.devcademy.dto.request;
 
+import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.enums.ReservationType;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ReservationCreateDto {
 
@@ -11,6 +13,7 @@ public class ReservationCreateDto {
     private Timestamp checkOut;
     private Integer personCount;
     private boolean submitted;
+    private AccommodationCreateDto accommodation;
 
     public ReservationCreateDto(ReservationType type, Timestamp checkIn, Timestamp checkOut, Integer personCount, boolean submitted) {
         this.type = type;
@@ -62,5 +65,13 @@ public class ReservationCreateDto {
 
     public void setSubmitted(boolean submitted) {
         this.submitted = submitted;
+    }
+
+    public AccommodationCreateDto getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(AccommodationCreateDto accommodation) {
+        this.accommodation = accommodation;
     }
 }

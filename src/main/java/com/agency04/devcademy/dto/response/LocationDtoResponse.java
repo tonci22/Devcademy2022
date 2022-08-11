@@ -11,8 +11,7 @@ public class LocationDtoResponse {
     private String title;
     private String subtitle;
     private Integer postalCode;
-    private List<AccommodationDtoResponse> accommodation;
-    private List<Reservation> reservations;
+    private List<AccommodationDtoResponse> accommodations;
 
     public LocationDtoResponse() {
     }
@@ -55,19 +54,12 @@ public class LocationDtoResponse {
         this.postalCode = postalCode;
     }
 
-    public List<AccommodationDtoResponse> getAccommodation() {
-        return accommodation;
+    public List<AccommodationDtoResponse> getAccommodations() {
+        return accommodations;
     }
 
-    public void setAccommodation(List<AccommodationDtoResponse> accommodation) {
-        this.accommodation = accommodation;
+    public void setAccommodations(List<AccommodationDtoResponse> accommodations) {
+        this.accommodations = accommodations;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 }

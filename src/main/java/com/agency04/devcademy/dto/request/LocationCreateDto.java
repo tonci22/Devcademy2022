@@ -8,7 +8,7 @@ public class LocationCreateDto {
     private String title;
     private String subtitle;
     private Integer postalCode;
-    private List<AccommodationCreateDto> accommodation;
+    private List<AccommodationCreateDto> accommodations;
     public LocationCreateDto() {
     }
 
@@ -42,11 +42,11 @@ public class LocationCreateDto {
         this.postalCode = postalCode;
     }
 
-    public List<AccommodationCreateDto> getAccommodation() {
-        return accommodation;
+    public List<AccommodationCreateDto> getAccommodations() {
+        return accommodations;
     }
 
-    public void setAccommodation(List<AccommodationCreateDto> accommodation) {
-        this.accommodation = accommodation;
+    public void setAccommodations(List<AccommodationCreateDto> accommodations) {
+        this.accommodations = accommodations;
     }
 }

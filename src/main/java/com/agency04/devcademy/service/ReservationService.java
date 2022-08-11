@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface ReservationService {
     Reservation add(ReservationCreateDto reservationCreateDto);
-    List<Reservation> addAll(List<ReservationCreateDto> reservationCreateDtos);
     List<Reservation> getAll();
     Reservation updateReservation(Long id, ReservationUpdateDto reservationUpdateDto);
     Reservation getById(Long id);

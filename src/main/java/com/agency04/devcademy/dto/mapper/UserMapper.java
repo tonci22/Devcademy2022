@@ -11,11 +11,7 @@ import java.util.List;
 
 @Component
 public class UserMapper {
-    private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String email;
 
     public User mapToDto(UserCreateDto userCreateDto){
         User user = new User();

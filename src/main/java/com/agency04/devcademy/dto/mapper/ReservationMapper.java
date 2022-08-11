@@ -4,6 +4,7 @@ import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.response.ReservationDtoResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.List;
 @Component
 public class ReservationMapper {
 
+    @Autowired
+    private AccommodationMapper accommodationMapper;
+
+
     public Reservation mapDtoTo(ReservationCreateDto reservationCreateDto){
         Reservation reservation = new Reservation();
         reservation.setType(reservationCreateDto.getType());
@@ -19,6 +24,7 @@ public class ReservationMapper {
         reservation.setCheckIn(reservationCreateDto.getCheckIn());
         reservation.setCheckOut(reservationCreateDto.getCheckOut());
         reservation.setSubmitted(reservationCreateDto.isSubmitted());
+        reservation.setAccommodation(accommodationMapper.mapToDtoAccommodation(reservationCreateDto.getAccommodation()));
 
         return reservation;
     }

@@ -9,7 +9,7 @@ public class LocationUpdateDto {
     private String title;
     private String subtitle;
     private Integer postalCode;
-    private List<AccommodationUpdateDto> accommodation;
+    private List<AccommodationUpdateDto> accommodations;
     public LocationUpdateDto() {
     }
 
@@ -51,11 +51,11 @@ public class LocationUpdateDto {
         this.postalCode = postalCode;
     }
 
-    public List<AccommodationUpdateDto> getAccommodation() {
-        return accommodation;
+    public List<AccommodationUpdateDto> getAccommodations() {
+        return accommodations;
     }
 
-    public void setAccommodation(List<AccommodationUpdateDto> accommodation) {
-        this.accommodation = accommodation;
+    public void setAccommodations(List<AccommodationUpdateDto> accommodations) {
+        this.accommodations = accommodations;
     }
 }

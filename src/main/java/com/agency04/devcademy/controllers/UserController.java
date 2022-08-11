@@ -65,9 +65,9 @@ public class UserController {
         return ResponseEntity.ok(reservationMapper.mapDtoTo((reservationService.getAll())));
     }
 
-    @PostMapping(value = "/{id}/reservations")
-    public ResponseEntity<UserDtoResponse> createReservation(@PathVariable("id") Long id, @RequestBody ReservationCreateDto reservationCreateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.addReservation(id, reservationCreateDto)));
+    @PostMapping(value = "/{id}/reservations/{idAccommodation}")
+    public ResponseEntity<UserDtoResponse> createReservation(@PathVariable("id") Long id, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody ReservationCreateDto reservationCreateDto){
+        return ResponseEntity.ok(userMapper.mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
     }
 
     @PutMapping("/{id}/reservations/{idReservation}")

@@ -27,7 +27,7 @@ public class LocationMapper {
         locationDtoRequest.setTitle(location.getTitle());
         locationDtoRequest.setSubtitle(location.getSubtitle());
         locationDtoRequest.setPostalCode(location.getPostalCode());
-        locationDtoRequest.setAccommodation(accommodationMapper.mapToDtoAccommodation(location.getAccommodations()));
+        locationDtoRequest.setAccommodations(accommodationMapper.mapToDtoAccommodation(location.getAccommodations()));
 
         return locationDtoRequest;
     }

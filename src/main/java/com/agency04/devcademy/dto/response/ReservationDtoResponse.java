@@ -12,6 +12,7 @@ public class ReservationDtoResponse {
     private Timestamp checkOut;
     private Integer personCount;
     private boolean submitted;
+    private AccommodationDtoResponse accommodation;
 
     public Long getId() {
         return id;
@@ -59,5 +60,13 @@ public class ReservationDtoResponse {
 
     public void setSubmitted(boolean submitted) {
         this.submitted = submitted;
+    }
+
+    public AccommodationDtoResponse getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(AccommodationDtoResponse accommodation) {
+        this.accommodation = accommodation;
     }
 }

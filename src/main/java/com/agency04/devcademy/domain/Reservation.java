@@ -4,6 +4,8 @@ import com.agency04.devcademy.enums.ReservationType;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Reservation {
@@ -21,8 +23,11 @@ public class Reservation {
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Accommodation accommodation;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ReservationHistory> reservationHistories = new ArrayList<>();
 
     public Long getId() {
         return id;

@@ -12,9 +12,8 @@ public interface UserService {
     User updateUser(Long id, UserUpdateDto userUpdateDto);
     void deleteById(Long id);
 
-    User addReservation(Long id, ReservationCreateDto reservationCreateDto);
+    User addReservation(Long id, Long idAccommodation, ReservationCreateDto reservationCreateDto);
     User addReservation(Long id, List<ReservationCreateDto> reservationCreateDtos);
 
     User updateReservation(Long idLocation, Long idReservation, ReservationUpdateDto reservationUpdateDto);
-    void deleteById(Long idUser, Long idReservation);
 }

@@ -138,6 +138,14 @@ public class Accommodation {
         this.type = type;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
 
         this.setTitle(accommodationUpdateDto.getTitle());
