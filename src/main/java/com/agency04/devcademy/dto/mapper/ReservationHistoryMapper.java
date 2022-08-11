@@ -2,6 +2,7 @@ package com.agency04.devcademy.dto.mapper;
 
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.domain.ReservationHistory;
+import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.response.ReservationHistoryDtoResponse;
 import org.springframework.stereotype.Component;
@@ -45,5 +46,16 @@ public class ReservationHistoryMapper {
         }
 
         return reservationHistoryDtoResponses;
+    }
+
+    public ReservationHistory mapToDto(ReservationHistoryCreateDto reservationHistoryCreateDto){
+        ReservationHistory reservationHistory = new ReservationHistory();
+
+        reservationHistory.setIdReservation(reservationHistoryCreateDto.getIdReservation());
+        reservationHistory.setFromType(reservationHistoryCreateDto.getFromType());
+        reservationHistory.setToType(reservationHistoryCreateDto.getToType());
+        reservationHistory.setEntryTimestamp(reservationHistoryCreateDto.getEntryTimestamp());
+
+        return reservationHistory;
     }
 }

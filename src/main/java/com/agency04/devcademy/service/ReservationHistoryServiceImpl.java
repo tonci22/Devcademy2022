@@ -3,6 +3,7 @@ package com.agency04.devcademy.service;
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.domain.ReservationHistory;
 import com.agency04.devcademy.dto.mapper.ReservationHistoryMapper;
+import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.repositories.ReservationHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class ReservationHistoryServiceImpl implements ReservationHistoryService 
 
     public ReservationHistoryServiceImpl(ReservationHistoryRepository reservationHistoryRepository) {
         this.reservationHistoryRepository = reservationHistoryRepository;
+    }
+
+    @Override
+    public ReservationHistory add(ReservationHistoryCreateDto reservationHistoryCreateDto) {
+        return reservationHistoryRepository.save(reservationHistoryMapper.mapToDto(reservationHistoryCreateDto));
     }
 
     @Override

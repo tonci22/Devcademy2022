@@ -1,17 +1,16 @@
 package com.agency04.devcademy;
 
-import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.domain.ReservationHistory;
+import com.agency04.devcademy.dto.mapper.AccommodationMapper;
 import com.agency04.devcademy.dto.mapper.UserMapper;
-import com.agency04.devcademy.dto.request.ReservationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.enums.ReservationType;
-import com.agency04.devcademy.service.AccommodationService;
-import com.agency04.devcademy.service.LocationService;
-import com.agency04.devcademy.service.ReservationService;
-import com.agency04.devcademy.service.UserService;
+import com.agency04.devcademy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -29,21 +28,25 @@ public class ApartmentReservationSystemApplication {
     private final AccommodationService accommodationService;
     private final LocationService locationService;
     private final UserService userService;
-
     private final ReservationService reservationService;
+    private final ReservationHistoryService reservationHistoryService;
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private AccommodationMapper accommodationMapper;
 
     public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationRepository,
                                                  @Qualifier("locationServiceImpl") LocationService locationService,
                                                  @Qualifier("userServiceImpl") UserService userService,
-                                                 @Qualifier("reservationServiceImpl") ReservationService reservationService) {
+                                                 @Qualifier("reservationServiceImpl") ReservationService reservationService,
+                                                 @Qualifier("reservationHistoryServiceImpl") ReservationHistoryService reservationHistoryService) {
 
         this.accommodationService = accommodationRepository;
         this.locationService = locationService;
         this.userService = userService;
         this.reservationService = reservationService;
+        this.reservationHistoryService = reservationHistoryService;
     }
 
     public static void main(String[] args) {
@@ -54,61 +57,26 @@ public class ApartmentReservationSystemApplication {
     public void initData() {
 
         Random random = new Random();
-        List<Location> locations = new ArrayList<>() {
-            {
-                add(new Location("Korcula", "subtitl", 20260));
-                add(new Location("Korcula", "subtitl", 20261));
-                add(new Location("Blato", "subtitl", 20253));
-                add(new Location("Vela Luka", "subtitl", 20456));
-                add(new Location("Lumbarda", "subtitl", 20263));
-            }
-        };
-        locationService.addAll(locations);
 
 
-        List<UserCreateDto> users = new ArrayList<>(){
-            {
-                add(new UserCreateDto("name", "last Name", "nesto.nesto@nes.com"));
-                add(new UserCreateDto("name1", "last Name1", "nesto1.nesto@nes.com"));
-                add(new UserCreateDto("name2", "last Name2", "nesto2.nesto@nes.com"));
-            }
-        };
+        Location location = new Location("Lumbarda", "subtitl", 20263);
+        locationService.add(location);
 
-        userService.addAll(users);
+        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 4,"www.Imagination.com");
+        accommodationCreateDto.setType(AccommodationType.APARTMENT);
+        accommodationCreateDto.setPrice(5);
 
-       /* Timestamp timestamp = new Timestamp(new Date().getTime() - random.nextInt(Integer.MAX_VALUE - 1));
-        List<ReservationCreateDto> reservations = new ArrayList<>() {
-            {
-                add(new ReservationCreateDto(ReservationType.TEMP, timestamp, new Timestamp(new Date().getTime()), 23, true));
-                add(new ReservationCreateDto(ReservationType.TEMP1, timestamp, new Timestamp(new Date().getTime()), 9, true));
-                add(new ReservationCreateDto(ReservationType.TEMP2, timestamp, new Timestamp(new Date().getTime()), 4, false));
-            }
-        };
-
-        reservationService.addAll(reservations);
-        List<Accommodation> accommodations = new ArrayList<>() {
-            {
-                add(new Accommodation("titl", "subtit", "opis"));
-                add(new Accommodation("titl1", "subtit1", "opis1"));
-                add(new Accommodation("titl2", "subtit2", "opis2"));
-            }
-        };
-
-        int i = 0;
-
-        for (Accommodation accommodation : accommodations) {
-            accommodation.setPrice(random.nextInt(999));
-            accommodation.setType(AccommodationType.APARTMENT);
-            accommodation.setFreeCancelation(false);
-            accommodation.setCategorization(random.nextInt(4) + 1);
-            accommodation.setImageUrl("www.slike.com");
-            accommodation.setPersonCount(random.nextInt(11) + 1);
-        }
-
-        //reservationService.addAll(reservations);
-        locationService.addAll(locations);
-        accommodationService.addAll(accommodations);*/
+        location.getAccommodations().add(accommodationMapper.mapToDtoAccommodation(accommodationCreateDto));
+        locationService.add(location);
 
 
+        Reservation reservationCreateDto = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
+
+        UserCreateDto userCreateDto = new UserCreateDto("name", "last Name", "nesto.nesto@nes.com");
+        userCreateDto.getReservations().add(reservationCreateDto);
+        userService.add(userCreateDto);
+
+        ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
+        reservationHistoryService.add(reservationHistory);
     }
 }

@@ -24,5 +24,4 @@ public class ReservationHistory {
 
     public ReservationHistory() {
     }
-
 }

@@ -31,4 +31,14 @@ public class Reservation {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ReservationHistory> reservationHistories = new ArrayList<>();
 
+    public Reservation() {
+    }
+
+    public Reservation(ReservationType type, Timestamp checkIn, Timestamp checkOut, Integer personCount, boolean submitted) {
+        this.type = type;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.personCount = personCount;
+        this.submitted = submitted;
+    }
 }

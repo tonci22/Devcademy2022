@@ -12,4 +12,13 @@ public class ReservationHistoryCreateDto {
     private ReservationType toType;
     private Long idReservation;
 
+    public ReservationHistoryCreateDto() {
+    }
+
+    public ReservationHistoryCreateDto(Timestamp entryTimestamp, ReservationType fromType, ReservationType toType, Long idReservation) {
+        this.entryTimestamp = entryTimestamp;
+        this.fromType = fromType;
+        this.toType = toType;
+        this.idReservation = idReservation;
+    }
 }
