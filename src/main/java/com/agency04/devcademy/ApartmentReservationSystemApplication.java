@@ -56,9 +56,6 @@ public class ApartmentReservationSystemApplication {
     @PostConstruct
     public void initData() {
 
-        Random random = new Random();
-
-
         Location location = new Location("Lumbarda", "subtitl", 20263);
         locationService.add(location);
 

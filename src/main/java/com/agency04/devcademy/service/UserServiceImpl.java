@@ -85,11 +85,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addReservation(Long id, List<ReservationCreateDto> reservationCreateDtos) {
-        return null;
-    }
-
-    @Override
     public User updateReservation(Long idLocation, Long idReservation, ReservationUpdateDto reservationUpdateDto) {
         User user = userRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location id not found"));
         reservationService.getById(idReservation);  //id validation check

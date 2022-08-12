@@ -2,6 +2,8 @@ package com.agency04.devcademy.domain;
 
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import lombok.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +24,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
+
+    private static Logger log = LoggerFactory.getLogger(User.class);
+
     public User() {
     }
 
@@ -30,5 +35,12 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
-
+    @PrePersist
+    private void prePersist(){
+        log.info("PrePersist --- First name: " + firstName + ", Last name: " + lastName + ", E-mail: " + email + ", Reservations: " + reservations);
+    }
+    @PreUpdate
+    private void preUpdate(){
+        log.info("PreUpdate --- First name: " + firstName + ", Last name: " + lastName + ", E-mail: " + email + ", Reservations: " + reservations);
+    }
 }

@@ -41,4 +41,19 @@ public class Reservation {
         this.personCount = personCount;
         this.submitted = submitted;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", type=" + type +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", personCount=" + personCount +
+                ", submitted=" + submitted +
+                ", user=" + user +
+                ", accommodation=" + accommodation +
+                ", reservationHistories=" + reservationHistories +
+                '}';
+    }
 }
