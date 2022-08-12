@@ -6,23 +6,18 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "postalCode"})})
-public class Location {
+public class Location extends AccommodationLocation{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 100)
-    private String title;
-    @Size(max = 150)
-    private String subtitle;
     @Max(5)
     private Integer postalCode;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,8 +27,8 @@ public class Location {
     }
 
     public Location(String title, String subtitle, Integer postalCode) {
-        this.title = title;
-        this.subtitle = subtitle;
+        this.setTitle(title);
+        this.setSubtitle(subtitle);
         this.postalCode = postalCode;
     }
 
