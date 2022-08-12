@@ -24,19 +24,15 @@ public class UserServiceImpl implements UserService {
 
     private final ReservationService reservationService;
 
-    private final AccommodationService accommodationService;
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private ReservationMapper reservationMapper;
-    @Autowired
-    private AccommodationMapper accommodationMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService, AccommodationService accommodationService) {
+    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService) {
         this.userRepository = userRepository;
         this.reservationService = reservationService;
-        this.accommodationService = accommodationService;
     }
 
     @Override
@@ -61,9 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id not found"));
-        User partial = userMapper.mapToDto(id,userUpdateDto);
-        partial.setReservations(user.getReservations());
-        return userRepository.save(partial);
+        return userRepository.save(user);
     }
 
     @Override

@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
-    @Query("SELECT acc FROM Accommodation acc WHERE acc.categorization = 3 AND acc.personCount >= 5")
-    List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual();
+//    @Query("SELECT acc FROM Accommodation acc WHERE acc.categorization = 3 AND acc.personCount >= 5")
+    List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual(Integer categorization, Integer personCount);
 }

@@ -10,6 +10,7 @@ public interface AccommodationService {
 
     Accommodation getById(Long id);
 
+    List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual(Integer categorization, Integer personCount);
     Accommodation add(AccommodationCreateDto accommodation);
 
     List<Accommodation> addAll(List<Accommodation> accommodations);

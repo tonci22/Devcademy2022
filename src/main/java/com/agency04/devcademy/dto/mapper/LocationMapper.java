@@ -13,13 +13,13 @@ import java.util.List;
 @Component
 public class LocationMapper {
 
-    @Autowired
-    private AccommodationMapper accommodationMapper;
 
     public LocationDtoResponse mapToDto(Location location) {
 
         if(location == null)
             return null;
+
+        AccommodationMapper accommodationMapper = new AccommodationMapper();
 
         LocationDtoResponse locationDtoRequest = new LocationDtoResponse();
 
@@ -72,5 +72,30 @@ public class LocationMapper {
         locationCreateDto.setPostalCode(location.getPostalCode());
 
         return locationCreateDto;
+    }
+
+    public Location mapToDtoCreate(LocationCreateDto location) {
+
+        if(location == null)
+            return null;
+
+        Location locationCreateDto = new Location();
+
+        locationCreateDto.setTitle(location.getTitle());
+        locationCreateDto.setSubtitle(location.getSubtitle());
+        locationCreateDto.setPostalCode(location.getPostalCode());
+
+        return locationCreateDto;
+    }
+
+    public Location mapToDto(LocationDtoResponse locationDtoResponse) {
+
+        Location location = new Location();
+        location.setId(locationDtoResponse.getId());
+        location.setTitle(locationDtoResponse.getTitle());
+        location.setSubtitle(locationDtoResponse.getSubtitle());
+        location.setPostalCode(locationDtoResponse.getPostalCode());
+
+        return location;
     }
 }

@@ -1,7 +1,5 @@
 package com.agency04.devcademy.dto.response;
 
-
-import com.agency04.devcademy.domain.Reservation;
 import lombok.*;
 
 import java.util.List;

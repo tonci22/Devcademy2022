@@ -15,6 +15,7 @@ public class AccommodationMapper {
     public AccommodationDtoResponse mapToDto(Accommodation accommodation) {
 
         AccommodationDtoResponse accommodationCreateDtoRequest = new AccommodationDtoResponse();
+        LocationMapper locationMapper = new LocationMapper();
 
         accommodationCreateDtoRequest.setId(accommodation.getId());
         accommodationCreateDtoRequest.setTitle(accommodation.getTitle());

@@ -9,6 +9,7 @@ import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.enums.ReservationType;
+import com.agency04.devcademy.repositories.AccommodationRepository;
 import com.agency04.devcademy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,10 +26,9 @@ import java.util.*;
 @SpringBootApplication
 public class ApartmentReservationSystemApplication {
 
-    private final AccommodationServiceImpl accommodationService;
+    private final AccommodationService accommodationService;
     private final LocationService locationService;
     private final UserService userService;
-    private final ReservationService reservationService;
     private final ReservationHistoryService reservationHistoryService;
 
     @Autowired
@@ -36,16 +36,14 @@ public class ApartmentReservationSystemApplication {
     @Autowired
     private AccommodationMapper accommodationMapper;
 
-    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationServiceImpl accommodationRepository,
+    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService,
                                                  @Qualifier("locationServiceImpl") LocationService locationService,
                                                  @Qualifier("userServiceImpl") UserService userService,
-                                                 @Qualifier("reservationServiceImpl") ReservationService reservationService,
                                                  @Qualifier("reservationHistoryServiceImpl") ReservationHistoryService reservationHistoryService) {
 
-        this.accommodationService = accommodationRepository;
+        this.accommodationService = accommodationService;
         this.locationService = locationService;
         this.userService = userService;
-        this.reservationService = reservationService;
         this.reservationHistoryService = reservationHistoryService;
     }
 
@@ -59,7 +57,7 @@ public class ApartmentReservationSystemApplication {
         Location location = new Location("Lumbarda", "subtitl", 20263);
         locationService.add(location);
 
-        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 5,"www.Imagination.com");
+        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,"www.Imagination.com");
         accommodationCreateDto.setType(AccommodationType.APARTMENT);
         accommodationCreateDto.setPrice(5);
 
@@ -76,6 +74,6 @@ public class ApartmentReservationSystemApplication {
         ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
         reservationHistoryService.add(reservationHistory);
 
-        System.out.println("Accommodations with 3 stars and minimum 5 beds: " + accommodationService.findByCat3AndPersonCount5().toString());
+        System.out.println("Accommodations with 3 stars and minimum 5 beds: " + accommodationService.findByCategorizationAndPersonCountGreaterThanEqual(3,5));
     }
 }

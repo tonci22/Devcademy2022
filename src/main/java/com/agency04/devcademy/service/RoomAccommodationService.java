@@ -20,6 +20,11 @@ public class RoomAccommodationService implements AccommodationService{
     }
 
     @Override
+    public List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual(Integer categorization, Integer personCount) {
+        return null;
+    }
+
+    @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
         return null;
     }

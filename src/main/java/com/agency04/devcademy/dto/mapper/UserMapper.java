@@ -27,7 +27,7 @@ public class UserMapper {
         user.setFirstName(userUpdateDto.getFirstName());
         user.setLastName(userUpdateDto.getLastName());
         user.setEmail(userUpdateDto.getEmail());
-        user.setReservations(userUpdateDto.getReservations());
+    //        user.setReservations(userUpdateDto.getReservations());
 
         return user;
     }
