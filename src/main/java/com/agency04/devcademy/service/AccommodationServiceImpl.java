@@ -22,6 +22,10 @@ public class AccommodationServiceImpl implements AccommodationService {
         this.locationRepository = locationRepository;
     }
 
+    public List<Accommodation> findByCat3AndPersonCount5(){
+        return accommodationRepository.findByCategorizationAndPersonCountGreaterThanEqual();
+    }
+
     @Override
     public Accommodation getById(Long id) {
         return accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));

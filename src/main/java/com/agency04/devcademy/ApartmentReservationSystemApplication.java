@@ -2,7 +2,6 @@ package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.domain.ReservationHistory;
 import com.agency04.devcademy.dto.mapper.AccommodationMapper;
 import com.agency04.devcademy.dto.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
@@ -22,10 +21,11 @@ import java.util.*;
 
 //todo - refactor all map methods from Accommodation and Location into separate mapper classes
 
+
 @SpringBootApplication
 public class ApartmentReservationSystemApplication {
 
-    private final AccommodationService accommodationService;
+    private final AccommodationServiceImpl accommodationService;
     private final LocationService locationService;
     private final UserService userService;
     private final ReservationService reservationService;
@@ -36,7 +36,7 @@ public class ApartmentReservationSystemApplication {
     @Autowired
     private AccommodationMapper accommodationMapper;
 
-    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationRepository,
+    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationServiceImpl accommodationRepository,
                                                  @Qualifier("locationServiceImpl") LocationService locationService,
                                                  @Qualifier("userServiceImpl") UserService userService,
                                                  @Qualifier("reservationServiceImpl") ReservationService reservationService,
@@ -59,7 +59,7 @@ public class ApartmentReservationSystemApplication {
         Location location = new Location("Lumbarda", "subtitl", 20263);
         locationService.add(location);
 
-        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 4,"www.Imagination.com");
+        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 5,"www.Imagination.com");
         accommodationCreateDto.setType(AccommodationType.APARTMENT);
         accommodationCreateDto.setPrice(5);
 
@@ -75,5 +75,7 @@ public class ApartmentReservationSystemApplication {
 
         ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
         reservationHistoryService.add(reservationHistory);
+
+        System.out.println("Accommodations with 3 stars and minimum 5 beds: " + accommodationService.findByCat3AndPersonCount5().toString());
     }
 }

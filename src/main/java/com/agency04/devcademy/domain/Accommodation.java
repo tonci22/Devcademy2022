@@ -39,7 +39,7 @@ public class Accommodation {
     @ManyToOne(cascade = CascadeType.ALL)
     private Location location;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
 
