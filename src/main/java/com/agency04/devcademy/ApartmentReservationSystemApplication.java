@@ -65,10 +65,10 @@ public class ApartmentReservationSystemApplication {
         locationService.add(location);
 
 
-        Reservation reservationCreateDto = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
+        Reservation reservation = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
 
         UserCreateDto userCreateDto = new UserCreateDto("name", "last Name", "nesto.nesto@nes.com");
-        userCreateDto.getReservations().add(reservationCreateDto);
+        userCreateDto.getReservations().add(reservation);
         userService.add(userCreateDto);
 
         ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);

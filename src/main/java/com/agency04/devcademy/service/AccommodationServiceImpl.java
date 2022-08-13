@@ -7,9 +7,13 @@ import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.repositories.AccommodationRepository;
 import com.agency04.devcademy.repositories.LocationRepository;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 @Primary
 @Service("accommodationServiceImpl")
@@ -34,6 +38,11 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
+    public Accommodation add(Accommodation accommodation) {
+        return accommodationRepository.save(accommodation);
+    }
+
+    @Override
     public Accommodation add(AccommodationCreateDto accommodationCreateDto) {
 
         Accommodation accommodation = new Accommodation();
@@ -45,6 +54,16 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     public List<Accommodation> addAll(List<Accommodation> accommodations) {
         return accommodationRepository.saveAll(accommodations);
+    }
+
+    @Override
+    public Set<Accommodation> randomizeAccommodations() {
+        Set<Accommodation> accommodations = new HashSet<>();
+        Random random = new Random();
+        while (accommodations.size() < 10) {
+            accommodations.add(accommodationRepository.findAll().get(random.nextInt(accommodationRepository.findAll().size())));
+        }
+        return accommodations;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 
 import java.util.List;
+import java.util.Set;
 
 public class MobileHomeAccommodationService implements AccommodationService{
 
@@ -20,12 +21,22 @@ public class MobileHomeAccommodationService implements AccommodationService{
     }
 
     @Override
+    public Accommodation add(Accommodation accommodation) {
+        return null;
+    }
+
+    @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
         return null;
     }
 
     @Override
     public List<Accommodation> addAll(List<Accommodation> accommodations) {
+        return null;
+    }
+
+    @Override
+    public Set<Accommodation> randomizeAccommodations() {
         return null;
     }
 

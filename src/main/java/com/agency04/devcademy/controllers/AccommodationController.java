@@ -40,14 +40,7 @@ public class AccommodationController {
         if (accommodationService.getAll().size() < 10) {
             return ResponseEntity.badRequest().build();
         }
-
-        Set<Accommodation> accommodations = new HashSet<>();
-        Random random = new Random();
-        while (accommodations.size() < 10) {
-            accommodations.add(accommodationService.getAll().get(random.nextInt(10)));
-        }
-
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodations.stream().toList()));
+        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.randomizeAccommodations().stream().toList()));
     }
 
     @GetMapping("/location")

@@ -10,6 +10,7 @@ import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class RoomAccommodationService implements AccommodationService{
 
@@ -25,12 +26,22 @@ public class RoomAccommodationService implements AccommodationService{
     }
 
     @Override
+    public Accommodation add(Accommodation accommodation) {
+        return null;
+    }
+
+    @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
         return null;
     }
 
     @Override
     public List<Accommodation> addAll(List<Accommodation> accommodations) {
+        return null;
+    }
+
+    @Override
+    public Set<Accommodation> randomizeAccommodations() {
         return null;
     }
 
