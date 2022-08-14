@@ -2,14 +2,13 @@ package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.dto.mapper.AccommodationMapper;
-import com.agency04.devcademy.dto.mapper.UserMapper;
+import com.agency04.devcademy.mapper.AccommodationMapper;
+import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.enums.ReservationType;
-import com.agency04.devcademy.repositories.AccommodationRepository;
 import com.agency04.devcademy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

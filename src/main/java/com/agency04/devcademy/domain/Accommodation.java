@@ -1,6 +1,5 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
@@ -48,8 +47,6 @@ public class Accommodation extends AccommodationLocation {
 
     public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
 
-        LocationMapper locationMapper = new LocationMapper();
-
         this.setTitle(accommodationUpdateDto.getTitle());
         this.setSubtitle(accommodationUpdateDto.getSubtitle());
         this.setDescription(accommodationUpdateDto.getDescription());
@@ -62,8 +59,6 @@ public class Accommodation extends AccommodationLocation {
     }
 
     public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
-
-        LocationMapper locationMapper = new LocationMapper();
 
         this.setTitle(accommodationCreateDto.getTitle());
         this.setSubtitle(accommodationCreateDto.getSubtitle());

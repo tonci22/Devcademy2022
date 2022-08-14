@@ -2,9 +2,8 @@ package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.domain.User;
-import com.agency04.devcademy.dto.mapper.AccommodationMapper;
-import com.agency04.devcademy.dto.mapper.ReservationMapper;
-import com.agency04.devcademy.dto.mapper.UserMapper;
+import com.agency04.devcademy.mapper.ReservationMapper;
+import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
@@ -62,7 +61,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id not found"));
-        return userRepository.save(user);
+        User partial = userMapper.mapToDto(userUpdateDto);
+        partial.setId(id);
+        partial.setReservations(user.getReservations());
+        return userRepository.save(partial);
     }
 
     @Override

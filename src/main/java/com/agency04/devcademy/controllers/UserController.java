@@ -1,8 +1,7 @@
 package com.agency04.devcademy.controllers;
 
-import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.dto.mapper.ReservationMapper;
-import com.agency04.devcademy.dto.mapper.UserMapper;
+import com.agency04.devcademy.mapper.ReservationMapper;
+import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;

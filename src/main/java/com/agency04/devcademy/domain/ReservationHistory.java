@@ -2,6 +2,7 @@ package com.agency04.devcademy.domain;
 
 import com.agency04.devcademy.enums.ReservationType;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ public class ReservationHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CreationTimestamp
     private Timestamp entryTimestamp;
     private ReservationType fromType;
     private ReservationType toType;

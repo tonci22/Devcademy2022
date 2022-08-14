@@ -1,9 +1,7 @@
 package com.agency04.devcademy.controllers;
 
-import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.dto.mapper.AccommodationMapper;
-import com.agency04.devcademy.dto.mapper.LocationMapper;
+import com.agency04.devcademy.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.response.LocationDtoResponse;

@@ -1,6 +1,6 @@
 package com.agency04.devcademy.controllers;
 
-import com.agency04.devcademy.dto.mapper.ReservationHistoryMapper;
+import com.agency04.devcademy.mapper.ReservationHistoryMapper;
 import com.agency04.devcademy.dto.response.ReservationHistoryDtoResponse;
 import com.agency04.devcademy.service.ReservationHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;

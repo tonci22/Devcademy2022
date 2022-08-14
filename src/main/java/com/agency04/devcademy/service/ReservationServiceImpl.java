@@ -1,8 +1,8 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.dto.mapper.AccommodationMapper;
-import com.agency04.devcademy.dto.mapper.ReservationMapper;
+import com.agency04.devcademy.mapper.AccommodationMapper;
+import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;

@@ -5,11 +5,10 @@ import lombok.*;
 
 import java.util.List;
 
-@Value
+@Data
 public class UserUpdateDto {
 
     String firstName;
     String lastName;
     String email;
-
 }
