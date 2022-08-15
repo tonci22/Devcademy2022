@@ -53,7 +53,6 @@ public class LocationController {
         return ResponseEntity.ok("DELETED LOCATION");
     }
 
-    //accommodation
 
     @PostMapping(value = "/{id}/accommodations")
     public ResponseEntity<Location> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
@@ -65,9 +64,8 @@ public class LocationController {
         return ResponseEntity.ok(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto));
     }
 
-    //todo - vratit se na ovo jer ne radi
     @DeleteMapping(value = "/{id}/accommodations/{idAccommodation}")
-    public ResponseEntity<String> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation){
+    public ResponseEntity<String> deleteAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation){
         accommodationService.deleteById(idAccommodation);
         return ResponseEntity.ok("DELETED ACCOMMODATION");
     }

@@ -34,7 +34,6 @@ class UserServiceImplTest {
         List<User> users = new ArrayList<>();
         users.add(user);
 
-        //returns data to test
         when(userRepository.findAll()).thenReturn(users);
 
         assertEquals(1,userService.getAll().size());

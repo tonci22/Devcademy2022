@@ -56,8 +56,6 @@ public class UserController {
         return ResponseEntity.ok("DELETED USER");
     }
 
-    //reservation
-
 
     @GetMapping(value = "/reservations")
     public ResponseEntity<List<ReservationDtoResponse>> getReservations(){
