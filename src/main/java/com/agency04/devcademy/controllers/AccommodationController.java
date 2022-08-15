@@ -48,12 +48,12 @@ public class AccommodationController {
 
     @PostMapping
     public ResponseEntity<AccommodationDtoResponse> createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto)));
+        return ResponseEntity.status(201).body(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<AccommodationDtoResponse> updateAccommodation(@RequestBody AccommodationUpdateDto accommodationUpdateDto, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto)));
+        return ResponseEntity.status(201).body(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto)));
     }
 
     @DeleteMapping("{id}")

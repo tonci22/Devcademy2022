@@ -56,7 +56,7 @@ public class LocationController {
 
     @PostMapping(value = "/{id}/accommodations")
     public ResponseEntity<Location> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
-        return ResponseEntity.ok(locationService.addAccommodation(id, accommodationCreateDto));
+        return ResponseEntity.status(201).body(locationService.addAccommodation(id, accommodationCreateDto));
     }
 
     @PutMapping(value = "/{id}/accommodations/{idAccommodation}")

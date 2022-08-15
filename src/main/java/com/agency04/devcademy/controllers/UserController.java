@@ -42,7 +42,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDtoResponse> createUser(@RequestBody UserCreateDto userCreateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.add(userCreateDto)));
+        return ResponseEntity.status(201).body(userMapper.mapToDto(userService.add(userCreateDto)));
     }
 
     @PutMapping("{id}")
@@ -64,7 +64,7 @@ public class UserController {
 
     @PostMapping(value = "/{id}/reservations/{idAccommodation}")
     public ResponseEntity<UserDtoResponse> createReservation(@PathVariable("id") Long id, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody ReservationCreateDto reservationCreateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
+        return ResponseEntity.status(201).body(userMapper.mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
     }
 
     @PutMapping("/{id}/reservations/{idReservation}")
