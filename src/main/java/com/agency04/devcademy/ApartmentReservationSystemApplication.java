@@ -1,16 +1,25 @@
 package com.agency04.devcademy;
 
-import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.domain.Location;
+import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.mapper.AccommodationMapper;
+import com.agency04.devcademy.mapper.UserMapper;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
+import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
-import com.agency04.devcademy.service.AccommodationService;
-import com.agency04.devcademy.service.LocationService;
+import com.agency04.devcademy.enums.ReservationType;
+import com.agency04.devcademy.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
+import java.sql.Timestamp;
 import java.util.*;
+
+//todo - refactor all map methods from Accommodation and Location into separate mapper classes
 
 
 @SpringBootApplication
@@ -18,10 +27,23 @@ public class ApartmentReservationSystemApplication {
 
     private final AccommodationService accommodationService;
     private final LocationService locationService;
+    private final UserService userService;
+    private final ReservationHistoryService reservationHistoryService;
 
-    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationRepository, @Qualifier("locationServiceImpl") LocationService locationService) {
-        this.accommodationService = accommodationRepository;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private AccommodationMapper accommodationMapper;
+
+    public ApartmentReservationSystemApplication(@Qualifier("accommodationServiceImpl") AccommodationService accommodationService,
+                                                 @Qualifier("locationServiceImpl") LocationService locationService,
+                                                 @Qualifier("userServiceImpl") UserService userService,
+                                                 @Qualifier("reservationHistoryServiceImpl") ReservationHistoryService reservationHistoryService) {
+
+        this.accommodationService = accommodationService;
         this.locationService = locationService;
+        this.userService = userService;
+        this.reservationHistoryService = reservationHistoryService;
     }
 
     public static void main(String[] args) {
@@ -31,36 +53,26 @@ public class ApartmentReservationSystemApplication {
     @PostConstruct
     public void initData() {
 
-        List<Location> locations = new ArrayList<>() {
-            {
-                add(new Location("Korcula", 20260));
-                add(new Location("Korcula", 20261));
-                add(new Location("Blato", 20253));
-                add(new Location("Vela Luka", 20456));
-                add(new Location("Lumbarda", 20263));
-            }
-        };
-        locationService.addAll(locations);
+        Location location = new Location("Lumbarda", "subtitl", 20263);
+        locationService.add(location);
 
-        List<Accommodation> accommodations = new ArrayList<>() {
-            {
-                add(new Accommodation("titl", "subtit", "opis"));
-                add(new Accommodation("titl1", "subtit1", "opis1"));
-                add(new Accommodation("titl2", "subtit2", "opis2"));
-            }
-        };
+        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,"www.Imagination.com");
+        accommodationCreateDto.setType(AccommodationType.APARTMENT);
+        accommodationCreateDto.setPrice(5);
 
-        for (Accommodation accommodation : accommodations) {
-            accommodation.setPrice(new Random().nextInt(999));
-            accommodation.setType(AccommodationType.APARTMENT);
-            accommodation.setFreeCancelation(false);
-            accommodation.setCategorization(new Random().nextInt(4) + 1);
-            accommodation.setImageUrl("www.slike.com");
-            accommodation.setPersonCount(new Random().nextInt(11) + 1);
-            accommodation.setLocation(locations.get(new Random().nextInt(locations.size())));
-        }
+        location.getAccommodations().add(accommodationMapper.mapToDtoAccommodation(accommodationCreateDto));
+        locationService.add(location);
 
-        locationService.addAll(locations);
-        accommodationService.addAll(accommodations);
+
+        Reservation reservation = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
+
+        UserCreateDto userCreateDto = new UserCreateDto("name", "last Name", "nesto.nesto@nes.com");
+        userCreateDto.getReservations().add(reservation);
+        userService.add(userCreateDto);
+
+        ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
+        reservationHistoryService.add(reservationHistory);
+
+        System.out.println("Accommodations with 3 stars and minimum 5 beds: " + accommodationService.findByCategorizationAndPersonCountGreaterThanEqual(3,5));
     }
 }

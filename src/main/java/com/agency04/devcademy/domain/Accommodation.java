@@ -1,27 +1,22 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
-import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.enums.AccommodationType;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import java.util.Objects;
+import java.util.List;
 
+@Data
 @Entity
-public class Accommodation {
+public class Accommodation extends AccommodationLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(max = 100)
-    private String title;
-    @Size(max = 200)
-    private String subtitle;
     private String description;
 
     @Min(1)
@@ -34,114 +29,23 @@ public class Accommodation {
     private double price;
     private AccommodationType type;
 
-    @OneToOne
-    @JoinColumn(name = "location_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Location location;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Reservation> reservations;
+
 
     public Accommodation() {
     }
 
     public Accommodation(String title, String subtitle, String description) {
-        this.title = title;
-        this.subtitle = subtitle;
+        this.setTitle(title);
+        this.setSubtitle(subtitle);
         this.description = description;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getCategorization() {
-        return categorization;
-    }
-
-    public void setCategorization(Integer categorization) {
-        this.categorization = categorization;
-    }
-
-    public Integer getPersonCount() {
-        return personCount;
-    }
-
-    public void setPersonCount(Integer personCount) {
-        this.personCount = personCount;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public boolean isFreeCancelation() {
-        return freeCancelation;
-    }
-
-    public void setFreeCancelation(boolean freeCancelation) {
-        this.freeCancelation = freeCancelation;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public AccommodationType getType() {
-        return type;
-    }
-
-    public void setType(AccommodationType type) {
-        this.type = type;
-    }
-
 
     public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
-
-        Location location = new Location();
-        location.setId(accommodationUpdateDto.getLocation().getId());
-        location.setName(accommodationUpdateDto.getLocation().getName());
-        location.setPostalCode(accommodationUpdateDto.getLocation().getPostalCode());
 
         this.setTitle(accommodationUpdateDto.getTitle());
         this.setSubtitle(accommodationUpdateDto.getSubtitle());
@@ -152,7 +56,6 @@ public class Accommodation {
         this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
         this.setPrice(accommodationUpdateDto.getPrice());
         this.setType(accommodationUpdateDto.getType());
-        this.setLocation(location);
     }
 
     public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
@@ -166,43 +69,5 @@ public class Accommodation {
         this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
         this.setPrice(accommodationCreateDto.getPrice());
         this.setType(accommodationCreateDto.getType());
-        this.setLocation(mapDtoToLocation(accommodationCreateDto));
-    }
-
-    private Location mapDtoToLocation(AccommodationCreateDto accommodationCreateDto) {
-        Location location = new Location();
-        location.setId(accommodationCreateDto.getLocation().getId());
-        location.setName(accommodationCreateDto.getLocation().getName());
-        location.setPostalCode(accommodationCreateDto.getLocation().getPostalCode());
-        return location;
-    }
-
-    @Override
-    public String toString() {
-        return "Accommodation{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", description='" + description + '\'' +
-                ", categorization=" + categorization +
-                ", personCount=" + personCount +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", freeCancelation=" + freeCancelation +
-                ", price=" + price +
-                ", type=" + type +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Accommodation that = (Accommodation) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

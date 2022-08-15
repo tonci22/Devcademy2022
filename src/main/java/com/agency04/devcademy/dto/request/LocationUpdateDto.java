@@ -1,43 +1,25 @@
 package com.agency04.devcademy.dto.request;
 
-import javax.validation.constraints.Size;
+import lombok.*;
 
+import java.util.List;
+
+@Data
 public class LocationUpdateDto {
 
     private Long id;
-    @Size(max = 150)
-    private String name;
-    private Integer postalCode;
 
+    private String title;
+    private String subtitle;
+    private Integer postalCode;
+    private List<AccommodationUpdateDto> accommodations;
     public LocationUpdateDto() {
     }
 
-    public LocationUpdateDto(String name, Integer postalCode) {
-        this.name = name;
+    public LocationUpdateDto(String title, String subtitle, Integer postalCode) {
+        this.title = title;
+        this.subtitle = subtitle;
         this.postalCode = postalCode;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
 }

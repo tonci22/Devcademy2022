@@ -1,12 +1,16 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
+import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
+import com.agency04.devcademy.dto.request.LocationUpdateDto;
 
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class RoomAccommodationService implements AccommodationService{
 
@@ -17,12 +21,27 @@ public class RoomAccommodationService implements AccommodationService{
     }
 
     @Override
+    public List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual(Integer categorization, Integer personCount) {
+        return null;
+    }
+
+    @Override
+    public Accommodation add(Accommodation accommodation) {
+        return null;
+    }
+
+    @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
         return null;
     }
 
     @Override
     public List<Accommodation> addAll(List<Accommodation> accommodations) {
+        return null;
+    }
+
+    @Override
+    public Set<Accommodation> randomizeAccommodations() {
         return null;
     }
 
