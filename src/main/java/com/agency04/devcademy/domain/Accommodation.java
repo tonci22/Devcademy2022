@@ -1,7 +1,5 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.dto.request.AccommodationCreateDto;
-import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.enums.AccommodationType;
 import lombok.Data;
 
@@ -22,9 +20,13 @@ public class Accommodation extends AccommodationLocation {
     @Min(1)
     @Max(5)
     private Integer categorization;
+
     @Min(1)
     private Integer personCount;
-    private String imageUrl;
+
+    @Lob
+    private Byte[] image;
+
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
@@ -43,31 +45,5 @@ public class Accommodation extends AccommodationLocation {
         this.setTitle(title);
         this.setSubtitle(subtitle);
         this.description = description;
-    }
-
-    public void mapFrom(AccommodationUpdateDto accommodationUpdateDto) {
-
-        this.setTitle(accommodationUpdateDto.getTitle());
-        this.setSubtitle(accommodationUpdateDto.getSubtitle());
-        this.setDescription(accommodationUpdateDto.getDescription());
-        this.setCategorization(accommodationUpdateDto.getCategorization());
-        this.setPersonCount(accommodationUpdateDto.getPersonCount());
-        this.setImageUrl(accommodationUpdateDto.getImageUrl());
-        this.setFreeCancelation(accommodationUpdateDto.isFreeCancelation());
-        this.setPrice(accommodationUpdateDto.getPrice());
-        this.setType(accommodationUpdateDto.getType());
-    }
-
-    public void mapFrom(AccommodationCreateDto accommodationCreateDto) {
-
-        this.setTitle(accommodationCreateDto.getTitle());
-        this.setSubtitle(accommodationCreateDto.getSubtitle());
-        this.setDescription(accommodationCreateDto.getDescription());
-        this.setCategorization(accommodationCreateDto.getCategorization());
-        this.setPersonCount(accommodationCreateDto.getPersonCount());
-        this.setImageUrl(accommodationCreateDto.getImageUrl());
-        this.setFreeCancelation(accommodationCreateDto.isFreeCancelation());
-        this.setPrice(accommodationCreateDto.getPrice());
-        this.setType(accommodationCreateDto.getType());
     }
 }

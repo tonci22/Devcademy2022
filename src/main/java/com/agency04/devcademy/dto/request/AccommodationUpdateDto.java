@@ -11,7 +11,7 @@ public class AccommodationUpdateDto {
     private String description;
     private Integer categorization;
     private Integer personCount;
-    private String imageUrl;
+    private Byte[] image;
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
@@ -20,13 +20,13 @@ public class AccommodationUpdateDto {
     public AccommodationUpdateDto() {
     }
 
-    public AccommodationUpdateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
+    public AccommodationUpdateDto(String title, String subtitle, String description, Integer categorization, Integer personCount, Byte[] imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
-        this.imageUrl = imageUrl;
+        this.image = imageUrl;
     }
 
 

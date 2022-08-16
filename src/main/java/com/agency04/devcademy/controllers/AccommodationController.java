@@ -1,5 +1,6 @@
 package com.agency04.devcademy.controllers;
 
+import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -41,9 +43,14 @@ public class AccommodationController {
         return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.randomizeAccommodations().stream().toList()));
     }
 
-    @GetMapping("/location")
-    public ResponseEntity<List<AccommodationDtoResponse>> getAccommodationsInLocation(@RequestParam("locationId") Long id){
-        return ResponseEntity.ok(accommodationMapper.mapToDto(locationService.getById(id).getAccommodations()));
+    @GetMapping("/{id}/image")
+    public ResponseEntity<Byte[]> getAccommodationImage(@PathVariable("id") Long id){
+        return ResponseEntity.ok(accommodationService.getById(id).getImage());
+    }
+
+    @PostMapping("/{id}/image")
+    public ResponseEntity<Byte[]> createAccommodationImage(@PathVariable Long id, @RequestParam("image") MultipartFile file){
+       return ResponseEntity.ok(accommodationService.saveImageFile(id, file));
     }
 
     @PostMapping

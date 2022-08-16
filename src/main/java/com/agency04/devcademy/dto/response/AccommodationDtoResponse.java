@@ -3,10 +3,6 @@ package com.agency04.devcademy.dto.response;
 import com.agency04.devcademy.enums.AccommodationType;
 import lombok.*;
 
-
-import java.util.List;
-import java.util.Objects;
-
 @Data
 public class AccommodationDtoResponse {
 
@@ -16,7 +12,7 @@ public class AccommodationDtoResponse {
     private String description;
     private Integer categorization;
     private Integer personCount;
-    private String imageUrl;
+    private Byte[] image;
     private boolean freeCancelation = true;
     private double price;
     private AccommodationType type;
@@ -24,12 +20,12 @@ public class AccommodationDtoResponse {
     public AccommodationDtoResponse() {
     }
 
-    public AccommodationDtoResponse(String title, String subtitle, String description, Integer categorization, Integer personCount, String imageUrl) {
+    public AccommodationDtoResponse(String title, String subtitle, String description, Integer categorization, Integer personCount, Byte[] imageUrl) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.categorization = categorization;
         this.personCount = personCount;
-        this.imageUrl = imageUrl;
+        this.image = imageUrl;
     }
 }
