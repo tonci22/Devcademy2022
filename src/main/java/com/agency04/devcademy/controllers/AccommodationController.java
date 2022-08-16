@@ -48,7 +48,7 @@ public class AccommodationController {
         return ResponseEntity.ok(accommodationService.getById(id).getImage());
     }
 
-    @PostMapping("/{id}/image")
+    @PutMapping("/{id}/image")
     public ResponseEntity<Byte[]> createAccommodationImage(@PathVariable Long id, @RequestParam("image") MultipartFile file){
        return ResponseEntity.ok(accommodationService.saveImageFile(id, file));
     }
