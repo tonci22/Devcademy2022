@@ -108,14 +108,14 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location updateAccommodation(Long idLocation,Long idAccommodation, AccommodationUpdateDto accommodationUpdateDto) {
         Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location idLocation not found"));
-        Accommodation accommodation = accommodationService.getById(idAccommodation);
-        accommodation.mapFrom(accommodationUpdateDto);
+        accommodationService.getById(idAccommodation);
+
+        Accommodation accommodation = accommodationMapper.mapToDtoUpdate(idAccommodation, accommodationUpdateDto);
 
         accommodationService.add(accommodationMapper.mapToDtoAccommodation(accommodation));
         return locationRepository.save(location);
     }
 
-    //todo - vratit se na ovo jer ne radi
     @Override
     public void deleteById(Long idLocation, Long idAccommodation) {
         Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location idLocation not found"));

@@ -6,6 +6,7 @@ import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -58,5 +59,10 @@ public class RoomAccommodationService implements AccommodationService{
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    @Override
+    public Byte[] saveImageFile(Long id, MultipartFile multipartFile) {
+        return null;
     }
 }

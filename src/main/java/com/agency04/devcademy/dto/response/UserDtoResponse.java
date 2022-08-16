@@ -12,6 +12,6 @@ public class UserDtoResponse {
     private String firstName;
     private String lastName;
     private String email;
-    private List<Reservation> reservations;
+    private List<ReservationDtoResponse> reservations;
 
 }

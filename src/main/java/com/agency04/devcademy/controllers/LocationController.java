@@ -1,6 +1,7 @@
 package com.agency04.devcademy.controllers;
 
 import com.agency04.devcademy.domain.Location;
+import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
@@ -55,13 +56,13 @@ public class LocationController {
 
 
     @PostMapping(value = "/{id}/accommodations")
-    public ResponseEntity<Location> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
-        return ResponseEntity.status(201).body(locationService.addAccommodation(id, accommodationCreateDto));
+    public ResponseEntity<LocationDtoResponse> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
+        return ResponseEntity.status(201).body(locationMapper.mapToDto(locationService.addAccommodation(id, accommodationCreateDto)));
     }
 
     @PutMapping(value = "/{id}/accommodations/{idAccommodation}")
-    public ResponseEntity<Location> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody AccommodationUpdateDto accommodationUpdateDto){
-        return ResponseEntity.ok(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto));
+    public ResponseEntity<LocationDtoResponse> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody AccommodationUpdateDto accommodationUpdateDto){
+        return ResponseEntity.ok(locationMapper.mapToDto(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto)));
     }
 
     @DeleteMapping(value = "/{id}/accommodations/{idAccommodation}")
