@@ -15,6 +15,13 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<String> handleException(NumberFormatException exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input type" + System.lineSeparator() + "   " + exception.getMessage());
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -34,7 +41,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<String> handleConstraintViolation(ConstraintViolationException exception){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getConstraintViolations().stream().map(e -> e.getMessage() + "\n").collect(Collectors.joining()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getConstraintViolations().stream().map(e -> e.getMessage() + System.lineSeparator()).collect(Collectors.joining()));
     }
 
     @ExceptionHandler(MethodNotAllowedException.class)
