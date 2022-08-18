@@ -8,6 +8,7 @@ import com.agency04.devcademy.service.AccommodationService;
 import com.agency04.devcademy.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +40,6 @@ public class AccommodationController {
 
     @GetMapping("/recommendation")
     public ResponseEntity<List<AccommodationDtoResponse>> getShuffledAccommodations() {
-        if (accommodationService.getAll().size() < 10) {
-            return ResponseEntity.badRequest().build();
-        }
         return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.randomizeAccommodations().stream().toList()));
     }
 
@@ -52,17 +50,17 @@ public class AccommodationController {
 
     @PutMapping("/{id}/image")
     public ResponseEntity<Byte[]> createAccommodationImage(@PathVariable Long id, @RequestParam("image") MultipartFile file){
-       return ResponseEntity.ok(accommodationService.saveImageFile(id, file));
+       return ResponseEntity.status(HttpStatus.ACCEPTED).body(accommodationService.saveImageFile(id, file));
     }
 
     @PostMapping
     public ResponseEntity<AccommodationDtoResponse> createAccommodation(@RequestBody AccommodationCreateDto accommodationCreateDto) {
-        return ResponseEntity.status(201).body(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(accommodationMapper.mapToDto(accommodationService.add(accommodationCreateDto)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<AccommodationDtoResponse> updateAccommodation(@RequestBody AccommodationUpdateDto accommodationUpdateDto, @PathVariable("id") Long id) {
-        return ResponseEntity.status(201).body(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(accommodationMapper.mapToDto(accommodationService.updateAccommodation(id, accommodationUpdateDto)));
     }
 
     @DeleteMapping("{id}")

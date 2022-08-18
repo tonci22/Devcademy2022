@@ -7,6 +7,7 @@ import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +32,11 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<ReservationDtoResponse> createReservation(@RequestBody ReservationCreateDto reservationCreateDto){
-        return ResponseEntity.status(201).body(reservationMapper.mapDtoTo(reservationService.add(reservationCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.mapDtoTo(reservationService.add(reservationCreateDto)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ReservationDtoResponse> updateReservation(@PathVariable("id") Long id, @RequestBody ReservationUpdateDto reservationUpdateDto){
-        return ResponseEntity.status(202).body(reservationMapper.mapDtoTo(reservationService.updateReservation(id, reservationUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(reservationMapper.mapDtoTo(reservationService.updateReservation(id, reservationUpdateDto)));
     }
 }

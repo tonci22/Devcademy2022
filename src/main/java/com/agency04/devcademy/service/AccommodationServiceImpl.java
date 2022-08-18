@@ -3,6 +3,7 @@ package com.agency04.devcademy.service;
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.exception.BadRequestException;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.repositories.AccommodationRepository;
@@ -53,7 +54,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         Accommodation accommodation = accommodationMapper.mapToDtoAccommodation(accommodationCreateDto);
 
-        return accommodationRepository.save(accommodation);
+        return add(accommodation);
     }
 
     @Override
@@ -63,6 +64,10 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public Set<Accommodation> randomizeAccommodations() {
+        if(accommodationRepository.findAll().size() < 10) {
+            throw new BadRequestException("Number of Accommodations is less than 10");
+        }
+
         Set<Accommodation> accommodations = new HashSet<>();
         Random random = new Random();
         while (accommodations.size() < 10) {
@@ -78,7 +83,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public Accommodation updateAccommodation(Long id, AccommodationUpdateDto accommodationUpdateDto) {
-        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation not found"));
+        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation ID not found"));
 
         Accommodation accommodation = accommodationMapper.mapToDtoUpdate(id, accommodationUpdateDto);
 
@@ -89,14 +94,14 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public void deleteById(Long id) {
-        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation id not found"));
+        accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation ID not found"));
         accommodationRepository.deleteById(id);
     }
 
     @Override
     public Byte[] saveImageFile(Long id, MultipartFile multipartFile) {
-        try{
-            Accommodation accommodation = accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation id not found"));
+        try {
+            Accommodation accommodation = accommodationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accommodation ID not found"));
 
             Byte[] imageByte = new Byte[multipartFile.getBytes().length];
 

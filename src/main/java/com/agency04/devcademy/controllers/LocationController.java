@@ -12,6 +12,7 @@ import com.agency04.devcademy.service.AccommodationService;
 import com.agency04.devcademy.service.LocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,12 +41,12 @@ public class LocationController {
 
     @PostMapping
     public ResponseEntity<LocationDtoResponse> createLocation(@RequestBody LocationCreateDto locationCreateDto) {
-        return ResponseEntity.ok(locationMapper.mapToDto(locationService.add(locationCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(locationMapper.mapToDto(locationService.add(locationCreateDto)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<LocationDtoResponse> updateLocation(@RequestBody LocationUpdateDto locationUpdateDto, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(locationMapper.mapToDto(locationService.updateLocation(id, locationUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(locationMapper.mapToDto(locationService.updateLocation(id, locationUpdateDto)));
     }
 
     @DeleteMapping("{id}")
@@ -57,12 +58,12 @@ public class LocationController {
 
     @PostMapping(value = "/{id}/accommodations")
     public ResponseEntity<LocationDtoResponse> createAccommodation(@PathVariable("id") Long id, @RequestBody List<AccommodationCreateDto> accommodationCreateDto){
-        return ResponseEntity.status(201).body(locationMapper.mapToDto(locationService.addAccommodation(id, accommodationCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(locationMapper.mapToDto(locationService.addAccommodation(id, accommodationCreateDto)));
     }
 
     @PutMapping(value = "/{id}/accommodations/{idAccommodation}")
     public ResponseEntity<LocationDtoResponse> updateAccommodation(@PathVariable("id") Long idLocation, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody AccommodationUpdateDto accommodationUpdateDto){
-        return ResponseEntity.ok(locationMapper.mapToDto(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(locationMapper.mapToDto(locationService.updateAccommodation(idLocation, idAccommodation, accommodationUpdateDto)));
     }
 
     @DeleteMapping(value = "/{id}/accommodations/{idAccommodation}")

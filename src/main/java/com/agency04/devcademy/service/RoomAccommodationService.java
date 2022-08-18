@@ -1,21 +1,14 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
-import com.agency04.devcademy.dto.request.LocationCreateDto;
-import com.agency04.devcademy.dto.request.LocationUpdateDto;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public class RoomAccommodationService implements AccommodationService{
-
-
     @Override
     public Accommodation getById(Long id) {
         return null;
@@ -63,6 +56,6 @@ public class RoomAccommodationService implements AccommodationService{
 
     @Override
     public Byte[] saveImageFile(Long id, MultipartFile multipartFile) {
-        return null;
+        return new Byte[0];
     }
 }
