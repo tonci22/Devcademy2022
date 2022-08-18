@@ -1,19 +1,21 @@
 package com.agency04.devcademy.controllers;
 
-import com.agency04.devcademy.domain.Accommodation;
-import com.agency04.devcademy.mapper.AccommodationMapper;
-import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
+import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.service.AccommodationService;
 import com.agency04.devcademy.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/accommodation")

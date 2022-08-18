@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,8 @@ public class Location extends AccommodationLocation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Max(5)
+    @Min(value = 10000, message = "{min.location.postalCode}")
+    @Max(value = 99999, message = "{max.location.postalCode}")
     private Integer postalCode;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Accommodation> accommodations = new ArrayList<>();

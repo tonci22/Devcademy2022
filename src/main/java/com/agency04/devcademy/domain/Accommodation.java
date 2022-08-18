@@ -1,7 +1,7 @@
 package com.agency04.devcademy.domain;
 
 import com.agency04.devcademy.enums.AccommodationType;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -17,11 +17,11 @@ public class Accommodation extends AccommodationLocation {
     private Long id;
     private String description;
 
-    @Min(1)
-    @Max(5)
+    @Min(value = 1, message = "{min.accommodation.categorization}")
+    @Max(value = 5, message = "{max.accommodation.categorization}")
     private Integer categorization;
 
-    @Min(1)
+    @Min(value = 1, message = "{min.accommodation.personCount}")
     private Integer personCount;
 
     @Lob
@@ -46,4 +46,5 @@ public class Accommodation extends AccommodationLocation {
         this.setSubtitle(subtitle);
         this.description = description;
     }
+
 }

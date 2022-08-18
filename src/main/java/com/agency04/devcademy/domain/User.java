@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Data
@@ -19,6 +20,7 @@ public class User {
 
     private String firstName;
     private String lastName;
+    @Email(message = "{email.user.email}")
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
