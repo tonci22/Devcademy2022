@@ -34,13 +34,9 @@ public class LocationServiceImpl implements LocationService {
 
         Location location = new Location();
         location.mapFrom(locationCreateDto);
+        locationRepository.save(location);
 
-        return locationRepository.save(location);
-    }
-
-    @Override
-    public Location add(Location location) {
-        return locationRepository.save(location);
+        return location;
     }
 
     @Override
@@ -48,8 +44,9 @@ public class LocationServiceImpl implements LocationService {
 
         Location location = new Location();
         location.mapFrom(locationUpdateDto);
+        locationRepository.save(location);
 
-        return locationRepository.save(location);
+        return location;
     }
 
     @Override
@@ -90,7 +87,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location addAccommodation(Long id, AccommodationCreateDto accommodationCreateDto) {
-        Location location = locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location id not found"));
+        Location location = locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location ID not found"));
         Accommodation accommodation = accommodationService.add(accommodationCreateDto);
         location.getAccommodations().add(accommodation);
         return locationRepository.save(location);
@@ -98,7 +95,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location addAccommodation(Long id, List<AccommodationCreateDto> accommodationCreateDtos) {
-        Location location = locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location id not found"));
+        Location location = locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location ID not found"));
         for (AccommodationCreateDto accommodationCreateDto : accommodationCreateDtos){
             addAccommodation(id, accommodationCreateDto);
         }
@@ -107,7 +104,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location updateAccommodation(Long idLocation,Long idAccommodation, AccommodationUpdateDto accommodationUpdateDto) {
-        Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location idLocation not found"));
+        Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location ID not found"));
         accommodationService.getById(idAccommodation);
 
         Accommodation accommodation = accommodationMapper.mapToDtoUpdate(idAccommodation, accommodationUpdateDto);
@@ -118,8 +115,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public void deleteById(Long idLocation, Long idAccommodation) {
-        Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location idLocation not found"));
-        //location.getAccommodations().remove(accommodationService.getById(idAccommodation));
+        Location location = locationRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location ID not found"));
         accommodationService.deleteById(idAccommodation);
         locationRepository.save(location);
     }

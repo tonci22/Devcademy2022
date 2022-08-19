@@ -21,10 +21,6 @@ public class MobileHomeAccommodationService implements AccommodationService{
         return null;
     }
 
-    @Override
-    public Accommodation add(Accommodation accommodation) {
-        return null;
-    }
 
     @Override
     public Accommodation add(AccommodationCreateDto accommodation) {

@@ -10,12 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import java.util.List;
 
 @RestController
@@ -41,6 +38,11 @@ public class AccommodationController {
     @GetMapping("/recommendation")
     public ResponseEntity<List<AccommodationDtoResponse>> getShuffledAccommodations() {
         return ResponseEntity.ok(accommodationMapper.mapToDto(accommodationService.randomizeAccommodations().stream().toList()));
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<List<AccommodationDtoResponse>> getAccommodationsInLocation(@RequestParam("locationId") Long id){
+        return ResponseEntity.ok(accommodationMapper.mapToDto(locationService.getById(id).getAccommodations()));
     }
 
     @GetMapping("/{id}/image")

@@ -2,6 +2,7 @@ package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
@@ -50,16 +51,12 @@ public class ApartmentReservationSystemApplication {
     @PostConstruct
     public void initData() {
 
-        Location location = new Location("Lumbarda", "subtitl", 20263);
+        LocationCreateDto location = new LocationCreateDto("Lumbarda", "subtitl", 20263);
         locationService.add(location);
 
         AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,new Byte[]{1,2,3,4});
         accommodationCreateDto.setType(AccommodationType.APARTMENT);
         accommodationCreateDto.setPrice(5);
-
-        location.getAccommodations().add(accommodationMapper.mapToDtoAccommodation(accommodationCreateDto));
-        locationService.add(location);
-
 
         Reservation reservation = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
 

@@ -14,7 +14,7 @@ public interface AccommodationService {
 
     List<Accommodation> findByCategorizationAndPersonCountGreaterThanEqual(Integer categorization, Integer personCount);
 
-    Accommodation add(Accommodation accommodation);
+
     Accommodation add(AccommodationCreateDto accommodation);
 
     List<Accommodation> addAll(List<Accommodation> accommodations);

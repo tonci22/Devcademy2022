@@ -45,16 +45,12 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public Accommodation add(Accommodation accommodation) {
-        return accommodationRepository.save(accommodation);
-    }
-
-    @Override
     public Accommodation add(AccommodationCreateDto accommodationCreateDto) {
 
         Accommodation accommodation = accommodationMapper.mapToDtoAccommodation(accommodationCreateDto);
+        accommodationRepository.save(accommodation);
 
-        return add(accommodation);
+        return accommodation;
     }
 
     @Override

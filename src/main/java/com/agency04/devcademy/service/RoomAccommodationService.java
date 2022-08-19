@@ -20,11 +20,6 @@ public class RoomAccommodationService implements AccommodationService{
     }
 
     @Override
-    public Accommodation add(Accommodation accommodation) {
-        return null;
-    }
-
-    @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
         return null;
     }
