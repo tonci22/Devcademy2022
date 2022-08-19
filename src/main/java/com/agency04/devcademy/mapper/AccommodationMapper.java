@@ -2,6 +2,7 @@ package com.agency04.devcademy.mapper;
 
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
+import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.response.AccommodationDtoResponse;
 import org.mapstruct.Mapper;
 
@@ -13,5 +14,5 @@ public interface AccommodationMapper {
     List<AccommodationDtoResponse> mapToDto(List<Accommodation> accommodations);
     AccommodationCreateDto mapToDtoAccommodation(Accommodation accommodation);
     Accommodation mapToDtoAccommodation(AccommodationCreateDto accommodationCreateDto);
-    List<AccommodationDtoResponse> mapToDtoAccommodation(List<Accommodation> accommodations);
+    Accommodation mapToDtoUpdate(Long id, AccommodationUpdateDto accommodationUpdateDto);
 }

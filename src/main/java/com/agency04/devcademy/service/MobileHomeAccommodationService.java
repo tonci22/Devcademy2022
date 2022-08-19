@@ -3,6 +3,7 @@ package com.agency04.devcademy.service;
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -20,10 +21,6 @@ public class MobileHomeAccommodationService implements AccommodationService{
         return null;
     }
 
-    @Override
-    public Accommodation add(Accommodation accommodation) {
-        return null;
-    }
 
     @Override
     public Accommodation add(AccommodationCreateDto accommodation) {
@@ -53,6 +50,11 @@ public class MobileHomeAccommodationService implements AccommodationService{
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    @Override
+    public Byte[] saveImageFile(Long id, MultipartFile multipartFile) {
+        return null;
     }
 
 }

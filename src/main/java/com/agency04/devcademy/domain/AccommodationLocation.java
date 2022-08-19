@@ -9,8 +9,8 @@ import javax.validation.constraints.Size;
 @MappedSuperclass
 public class AccommodationLocation {
 
-    @Size(max = 100)
+    @Size(max = 100, message = "{size.title}")
     private String title;
-    @Size(max = 150)
+    @Size(max = 150, message = "{size.subtitle}")
     private String subtitle;
 }

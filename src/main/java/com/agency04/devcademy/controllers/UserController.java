@@ -12,6 +12,7 @@ import com.agency04.devcademy.service.ReservationServiceImpl;
 import com.agency04.devcademy.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,12 +43,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDtoResponse> createUser(@RequestBody UserCreateDto userCreateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.add(userCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.mapToDto(userService.add(userCreateDto)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<UserDtoResponse> updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateDto userUpdateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.updateUser(id, userUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userMapper.mapToDto(userService.updateUser(id, userUpdateDto)));
     }
 
     @DeleteMapping("{id}")
@@ -64,12 +65,12 @@ public class UserController {
 
     @PostMapping(value = "/{id}/reservations/{idAccommodation}")
     public ResponseEntity<UserDtoResponse> createReservation(@PathVariable("id") Long id, @PathVariable("idAccommodation") Long idAccommodation, @RequestBody ReservationCreateDto reservationCreateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.mapToDto(userService.addReservation(id, idAccommodation,reservationCreateDto)));
     }
 
     @PutMapping("/{id}/reservations/{idReservation}")
     public ResponseEntity<UserDtoResponse> updateReservation(@PathVariable("id") Long id, @PathVariable("idReservation") Long idReservation, @RequestBody ReservationUpdateDto reservationUpdateDto){
-        return ResponseEntity.ok(userMapper.mapToDto(userService.updateReservation(id,idReservation,reservationUpdateDto)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userMapper.mapToDto(userService.updateReservation(id,idReservation,reservationUpdateDto)));
     }
 
     @DeleteMapping("/{id}/reservations/{idReservation}")

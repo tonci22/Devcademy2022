@@ -4,6 +4,7 @@ import com.agency04.devcademy.enums.ReservationType;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Reservation {
     private ReservationType type;
     private Timestamp checkIn;
     private Timestamp checkOut;
+    @Min(value = 1, message = "{min.reservation.personCount}")
     private Integer personCount;
     private boolean submitted;
 

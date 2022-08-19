@@ -2,6 +2,7 @@ package com.agency04.devcademy;
 
 import com.agency04.devcademy.domain.Location;
 import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
@@ -18,9 +19,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
 import java.util.*;
-
-//todo - refactor all map methods from Accommodation and Location into separate mapper classes
-
 
 @SpringBootApplication
 public class ApartmentReservationSystemApplication {
@@ -53,16 +51,12 @@ public class ApartmentReservationSystemApplication {
     @PostConstruct
     public void initData() {
 
-        Location location = new Location("Lumbarda", "subtitl", 20263);
+        LocationCreateDto location = new LocationCreateDto("Lumbarda", "subtitl", 20263);
         locationService.add(location);
 
-        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,"www.Imagination.com");
+        AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,new Byte[]{1,2,3,4});
         accommodationCreateDto.setType(AccommodationType.APARTMENT);
         accommodationCreateDto.setPrice(5);
-
-        location.getAccommodations().add(accommodationMapper.mapToDtoAccommodation(accommodationCreateDto));
-        locationService.add(location);
-
 
         Reservation reservation = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
 
@@ -72,7 +66,5 @@ public class ApartmentReservationSystemApplication {
 
         ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
         reservationHistoryService.add(reservationHistory);
-
-        System.out.println("Accommodations with 3 stars and minimum 5 beds: " + accommodationService.findByCategorizationAndPersonCountGreaterThanEqual(3,5));
     }
 }

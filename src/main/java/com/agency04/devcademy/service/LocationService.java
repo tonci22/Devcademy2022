@@ -13,8 +13,6 @@ public interface LocationService {
 
     Location add(LocationCreateDto locationCreateDto);
 
-    Location add(Location location);
-
     Location add(LocationUpdateDto locationUpdateDto);
 
     List<Location> addAll(Collection<Location> locations);
