@@ -23,8 +23,16 @@ public class User {
     @Email(message = "{email.user.email}")
     private String email;
 
+    private String password;
+    private boolean enabled;
+    private boolean tokenExpired;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Reservation> reservations;
+
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
 
     private static Logger log = LoggerFactory.getLogger(User.class);
