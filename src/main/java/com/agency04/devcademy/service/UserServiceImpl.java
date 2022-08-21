@@ -1,7 +1,11 @@
 package com.agency04.devcademy.service;
 
+import com.agency04.devcademy.domain.Privilege;
 import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.domain.Role;
 import com.agency04.devcademy.domain.User;
+import com.agency04.devcademy.enums.PrivilegeType;
+import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
@@ -9,6 +13,7 @@ import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.dto.request.UserUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
+import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,25 +28,28 @@ public class UserServiceImpl implements UserService {
 
     private final ReservationService reservationService;
 
+    private final RoleRepository roleRepository;
+
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private ReservationMapper reservationMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService) {
+    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.reservationService = reservationService;
-    }
-
-    @Override
-    public User add(User user) {
-        return userRepository.save(user);
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public User add(UserCreateDto userCreateDto) {
-        return userRepository.save(userMapper.mapToDto(userCreateDto));
+
+        Role role = roleRepository.findByName(RoleType.ROLE_USER.toString());
+        User user = userMapper.mapToDto(userCreateDto);
+        user.setRoles(List.of(role));
+        userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -74,9 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //reservation
 
-    //todo - mora dodavati postojece accommodation-e, a ne kreirati nove
     @Override
     public User addReservation(Long id, Long idAccommodation, ReservationCreateDto reservationCreateDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id not found"));
@@ -88,7 +94,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateReservation(Long idLocation, Long idReservation, ReservationUpdateDto reservationUpdateDto) {
         User user = userRepository.findById(idLocation).orElseThrow(() -> new ResourceNotFoundException("Location id not found"));
-        reservationService.getById(idReservation);  //id validation check
+        reservationService.getById(idReservation);
 
         reservationService.updateReservation(idReservation,reservationUpdateDto);
 

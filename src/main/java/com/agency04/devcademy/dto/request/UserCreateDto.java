@@ -1,6 +1,7 @@
 package com.agency04.devcademy.dto.request;
 
 import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.domain.Role;
 import lombok.*;
 
 import java.util.ArrayList;

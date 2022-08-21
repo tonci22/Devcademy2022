@@ -3,6 +3,7 @@ package com.agency04.devcademy.service;
 import com.agency04.devcademy.domain.Privilege;
 import com.agency04.devcademy.domain.Role;
 import com.agency04.devcademy.domain.User;
+import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             return new org.springframework.security.core.userdetails.User(
                     " ", " ", true, true, true, true,
-                    getAuthorities(Arrays.asList(roleRepository.findByName("ROLE_USER"))));
+                    getAuthorities(Arrays.asList(roleRepository.findByName(RoleType.ROLE_USER.toString()))));
         }
 
         return new org.springframework.security.core.userdetails.User(

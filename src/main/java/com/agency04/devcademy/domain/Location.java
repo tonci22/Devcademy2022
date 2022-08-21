@@ -22,7 +22,7 @@ public class Location extends AccommodationLocation{
     @Min(value = 10000, message = "{min.location.postalCode}")
     @Max(value = 99999, message = "{max.location.postalCode}")
     private Integer postalCode;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Accommodation> accommodations = new ArrayList<>();
 
     public Location() {

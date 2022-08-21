@@ -1,5 +1,7 @@
 package com.agency04.devcademy.domain;
 
+import com.agency04.devcademy.enums.PrivilegeType;
+import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.repositories.PrivilegeRepository;
 import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
@@ -34,23 +36,23 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         if (alreadySetup)
             return;
 
-        Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
-        Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        Privilege readPrivilege = createPrivilegeIfNotFound(PrivilegeType.READ_PRIVILEGE.toString());
+        Privilege writePrivilege = createPrivilegeIfNotFound(PrivilegeType.WRITE_PRIVILEGE.toString());
 
         List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
 
-        createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+        createRoleIfNotFound(RoleType.ROLE_ADMIN.toString(), adminPrivileges);
+        createRoleIfNotFound(RoleType.ROLE_USER.toString(), Arrays.asList(readPrivilege));
 
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
-        User user = new User();
-        user.setFirstName("admin");
-        user.setLastName("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        user.setEmail("admin@admin.com");
-        user.setRoles(Arrays.asList(adminRole));
-        user.setEnabled(true);
-        userRepository.save(user);
+        Role adminRole = roleRepository.findByName(RoleType.ROLE_ADMIN.toString());
+        User admin = new User();
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setEmail("admin@admin.com");
+        admin.setRoles(Arrays.asList(adminRole));
+        admin.setEnabled(true);
+        userRepository.save(admin);
 
         alreadySetup = true;
     }
@@ -68,8 +70,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    Role createRoleIfNotFound(
-            String name, Collection<Privilege> privileges) {
+    Role createRoleIfNotFound(String name, Collection<Privilege> privileges) {
 
         Role role = roleRepository.findByName(name);
 

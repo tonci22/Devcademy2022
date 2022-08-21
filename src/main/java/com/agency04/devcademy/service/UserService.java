@@ -6,7 +6,6 @@ import com.agency04.devcademy.dto.request.*;
 import java.util.List;
 
 public interface UserService {
-    User add(User user);
     User add(UserCreateDto userCreateDto);
     List<User> addAll(List<UserCreateDto> userCreateDtos);
     List<User> getAll();
