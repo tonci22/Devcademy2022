@@ -11,15 +11,14 @@ public class ReservationCreateDto {
     private Timestamp checkIn;
     private Timestamp checkOut;
     private Integer personCount;
-    private boolean submitted;
+
     private AccommodationCreateDto accommodation;
 
-    public ReservationCreateDto(ReservationType type, Timestamp checkIn, Timestamp checkOut, Integer personCount, boolean submitted) {
+    public ReservationCreateDto(ReservationType type, Timestamp checkIn, Timestamp checkOut, Integer personCount) {
         this.type = type;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.personCount = personCount;
-        this.submitted = submitted;
     }
 
     public ReservationCreateDto() {

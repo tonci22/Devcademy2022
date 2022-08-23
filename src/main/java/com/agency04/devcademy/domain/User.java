@@ -17,7 +17,7 @@ public class User {
 
     private String firstName;
     private String lastName;
-    @Email(message = "{email.user.email}")
+
     private String email;
 
     private String password;

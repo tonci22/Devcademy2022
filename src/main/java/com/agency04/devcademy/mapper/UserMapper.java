@@ -13,6 +13,7 @@ public interface UserMapper {
     User mapToDto(UserCreateDto userCreateDto);
     User mapToDto(Long id, UserUpdateDto userUpdateDto);
     UserDtoResponse mapToDto(User user);
+    UserCreateDto mapToDtoUser(User user);
     List<UserDtoResponse> mapToDto(List<User> users);
     User mapToDto(UserUpdateDto userUpdateDto);
 }

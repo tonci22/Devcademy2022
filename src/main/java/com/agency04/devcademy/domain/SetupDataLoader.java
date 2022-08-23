@@ -1,10 +1,14 @@
 package com.agency04.devcademy.domain;
 
+import com.agency04.devcademy.domain.Privilege;
+import com.agency04.devcademy.domain.Role;
+import com.agency04.devcademy.domain.User;
 import com.agency04.devcademy.enums.PrivilegeType;
 import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.repositories.PrivilegeRepository;
 import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
+import com.agency04.devcademy.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -28,6 +32,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private PrivilegeRepository privilegeRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     @Transactional
@@ -44,15 +50,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createRoleIfNotFound(RoleType.ROLE_ADMIN.toString(), adminPrivileges);
         createRoleIfNotFound(RoleType.ROLE_USER.toString(), Arrays.asList(readPrivilege));
 
-        Role adminRole = roleRepository.findByName(RoleType.ROLE_ADMIN.toString());
-        User admin = new User();
-        admin.setFirstName("admin");
-        admin.setLastName("admin");
-        admin.setPassword(passwordEncoder.encode("admin"));
-        admin.setEmail("admin@admin.com");
-        admin.setRoles(Arrays.asList(adminRole));
-        admin.setEnabled(true);
-        userRepository.save(admin);
+        userDetailsService.initAdminUser();
+        userDetailsService.initUser();
 
         alreadySetup = true;
     }

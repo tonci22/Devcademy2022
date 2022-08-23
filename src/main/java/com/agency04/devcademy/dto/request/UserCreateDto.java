@@ -1,8 +1,7 @@
 package com.agency04.devcademy.dto.request;
 
-import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.domain.Role;
-import lombok.*;
+import com.agency04.devcademy.dto.response.RoleDtoResponse;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,11 @@ public class UserCreateDto {
     private String firstName;
     private String lastName;
     private String email;
-    private List<Reservation> reservations = new ArrayList<>();
+    private String password;
+    private boolean enabled;
+    private boolean tokenExpired;
+    private List<ReservationCreateDto> reservations = new ArrayList<>();
+    private List<RoleDtoResponse> roles = new ArrayList<>();
 
     public UserCreateDto() {
     }

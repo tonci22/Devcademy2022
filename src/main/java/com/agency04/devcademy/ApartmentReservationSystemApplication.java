@@ -1,24 +1,21 @@
 package com.agency04.devcademy;
 
-import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.mapper.UserMapper;
-import com.agency04.devcademy.dto.request.AccommodationCreateDto;
-import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
-import com.agency04.devcademy.dto.request.UserCreateDto;
-import com.agency04.devcademy.enums.AccommodationType;
-import com.agency04.devcademy.enums.ReservationType;
-import com.agency04.devcademy.service.*;
+import com.agency04.devcademy.service.AccommodationService;
+import com.agency04.devcademy.service.LocationService;
+import com.agency04.devcademy.service.ReservationHistoryService;
+import com.agency04.devcademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.List;
 
 @SpringBootApplication
 public class ApartmentReservationSystemApplication {
