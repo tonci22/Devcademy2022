@@ -4,7 +4,6 @@ import com.agency04.devcademy.config.SwaggerConfig;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.response.ReservationDtoResponse;
-import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.service.ReservationService;
 import io.swagger.annotations.Api;

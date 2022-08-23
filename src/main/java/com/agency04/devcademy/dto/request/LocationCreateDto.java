@@ -1,9 +1,8 @@
 package com.agency04.devcademy.dto.request;
 
 
-import lombok.*;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

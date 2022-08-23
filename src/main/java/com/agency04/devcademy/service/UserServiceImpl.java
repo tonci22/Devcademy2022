@@ -1,46 +1,33 @@
 package com.agency04.devcademy.service;
 
-import com.agency04.devcademy.domain.Privilege;
 import com.agency04.devcademy.domain.Reservation;
 import com.agency04.devcademy.domain.Role;
 import com.agency04.devcademy.domain.User;
-import com.agency04.devcademy.enums.PrivilegeType;
-import com.agency04.devcademy.enums.RoleType;
-import com.agency04.devcademy.mapper.ReservationMapper;
-import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.dto.request.UserCreateDto;
 import com.agency04.devcademy.dto.request.UserUpdateDto;
+import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
+import com.agency04.devcademy.mapper.ReservationMapper;
+import com.agency04.devcademy.mapper.UserMapper;
 import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final ReservationService reservationService;
-
     private final RoleRepository roleRepository;
-
-    @Autowired
     private UserMapper userMapper;
-
-    @Autowired
     private ReservationMapper reservationMapper;
-
-    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.reservationService = reservationService;
-        this.roleRepository = roleRepository;
-    }
 
     @Override
     public User add(UserCreateDto userCreateDto) {

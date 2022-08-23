@@ -1,11 +1,9 @@
 package com.agency04.devcademy.dto.request;
 
-import com.agency04.devcademy.domain.ReservationHistory;
 import com.agency04.devcademy.enums.ReservationType;
-import lombok.*;
+import lombok.Data;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 public class ReservationUpdateDto {

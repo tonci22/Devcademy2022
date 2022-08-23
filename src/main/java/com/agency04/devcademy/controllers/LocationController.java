@@ -1,14 +1,12 @@
 package com.agency04.devcademy.controllers;
 
 import com.agency04.devcademy.config.SwaggerConfig;
-import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.mapper.AccommodationMapper;
-import com.agency04.devcademy.mapper.LocationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
-import com.agency04.devcademy.dto.response.LocationDtoResponse;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
+import com.agency04.devcademy.dto.response.LocationDtoResponse;
+import com.agency04.devcademy.mapper.LocationMapper;
 import com.agency04.devcademy.service.AccommodationService;
 import com.agency04.devcademy.service.LocationServiceImpl;
 import io.swagger.annotations.Api;

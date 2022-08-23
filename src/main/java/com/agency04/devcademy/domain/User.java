@@ -3,7 +3,6 @@ package com.agency04.devcademy.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.List;
 
 @Data

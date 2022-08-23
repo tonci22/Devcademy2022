@@ -7,8 +7,7 @@ import com.agency04.devcademy.exception.BadRequestException;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.repositories.AccommodationRepository;
-import com.agency04.devcademy.repositories.LocationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,18 +20,10 @@ import java.util.Set;
 
 @Primary
 @Service("accommodationServiceImpl")
+@AllArgsConstructor
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;
-    private final LocationRepository locationRepository;
-
-    @Autowired
     private AccommodationMapper accommodationMapper;
-
-    public AccommodationServiceImpl(AccommodationRepository accommodationRepository, LocationRepository locationRepository) {
-        this.accommodationRepository = accommodationRepository;
-        this.locationRepository = locationRepository;
-    }
-
 
     @Override
     public Accommodation getById(Long id) {

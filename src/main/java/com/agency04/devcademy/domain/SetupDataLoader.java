@@ -1,8 +1,5 @@
 package com.agency04.devcademy.domain;
 
-import com.agency04.devcademy.domain.Privilege;
-import com.agency04.devcademy.domain.Role;
-import com.agency04.devcademy.domain.User;
 import com.agency04.devcademy.enums.PrivilegeType;
 import com.agency04.devcademy.enums.RoleType;
 import com.agency04.devcademy.repositories.PrivilegeRepository;
