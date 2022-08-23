@@ -32,6 +32,7 @@ public class SwaggerConfig {
     public static final String RESERVATIONCONTROLLERTAG = "Reservation Controller";
     public static final String RESERVATIONHISTORYCONTROLLERTAG = "Reservation History Controller";
     public static final String USERCONTROLLERTAG = "User Controller";
+    public static final String LOGINCONTROLLERTAG = "Login Controller";
 
     @Bean
     public Docket api() {
