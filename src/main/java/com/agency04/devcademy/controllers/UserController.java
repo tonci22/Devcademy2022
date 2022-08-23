@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -80,6 +81,7 @@ public class UserController {
 
     @ApiOperation("Update a Reservation in User by Reservation ID and User ID")
     @PutMapping("/{id}/reservations/{idReservation}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<UserDtoResponse> updateReservation(@PathVariable("id") Long id, @PathVariable("idReservation") Long idReservation, @RequestBody ReservationUpdateDto reservationUpdateDto){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userMapper.mapToDto(userService.updateReservation(id,idReservation,reservationUpdateDto)));
     }
