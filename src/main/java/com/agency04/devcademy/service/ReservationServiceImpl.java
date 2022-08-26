@@ -1,33 +1,24 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Reservation;
-import com.agency04.devcademy.mapper.AccommodationMapper;
-import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.dto.request.ReservationCreateDto;
 import com.agency04.devcademy.dto.request.ReservationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
+import com.agency04.devcademy.mapper.ReservationMapper;
 import com.agency04.devcademy.repositories.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ReservationServiceImpl implements ReservationService{
     private final ReservationRepository reservationRepository;
     private final AccommodationService accommodationService;
     private final ReservationHistoryService reservationHistoryService;
-
-    @Autowired
     private ReservationMapper reservationMapper;
-    @Autowired
-    private AccommodationMapper accommodationMapper;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, AccommodationService accommodationService, ReservationHistoryService reservationHistoryService) {
-        this.reservationRepository = reservationRepository;
-        this.accommodationService = accommodationService;
-        this.reservationHistoryService = reservationHistoryService;
-    }
 
     @Override
     public Reservation add(ReservationCreateDto reservationCreateDto) {

@@ -28,5 +28,4 @@ public class Config {
     RoomAccommodationService accommodationService() {
         return new RoomAccommodationService();
     }
-
 }

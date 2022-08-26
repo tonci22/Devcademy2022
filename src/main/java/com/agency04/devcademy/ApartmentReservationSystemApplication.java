@@ -1,24 +1,21 @@
 package com.agency04.devcademy;
 
-import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.domain.Reservation;
+import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
+import com.agency04.devcademy.enums.AccommodationType;
 import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.mapper.UserMapper;
-import com.agency04.devcademy.dto.request.AccommodationCreateDto;
-import com.agency04.devcademy.dto.request.ReservationHistoryCreateDto;
-import com.agency04.devcademy.dto.request.UserCreateDto;
-import com.agency04.devcademy.enums.AccommodationType;
-import com.agency04.devcademy.enums.ReservationType;
-import com.agency04.devcademy.service.*;
+import com.agency04.devcademy.service.AccommodationService;
+import com.agency04.devcademy.service.LocationService;
+import com.agency04.devcademy.service.ReservationHistoryService;
+import com.agency04.devcademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.List;
 
 @SpringBootApplication
 public class ApartmentReservationSystemApplication {
@@ -52,19 +49,15 @@ public class ApartmentReservationSystemApplication {
     public void initData() {
 
         LocationCreateDto location = new LocationCreateDto("Lumbarda", "subtitl", 20263);
-        locationService.add(location);
+
 
         AccommodationCreateDto accommodationCreateDto= new AccommodationCreateDto("Imagination","Imagination1", "Imagination2", 3, 6,new Byte[]{1,2,3,4});
         accommodationCreateDto.setType(AccommodationType.APARTMENT);
         accommodationCreateDto.setPrice(5);
 
-        Reservation reservation = new Reservation(ReservationType.PERMANENT,new Timestamp(new Date().getTime() - 23423444),new Timestamp(new Date().getTime()),5,true);
+        location.setAccommodations(List.of(accommodationCreateDto));
 
-        UserCreateDto userCreateDto = new UserCreateDto("name", "last Name", "nesto.nesto@nes.com");
-        userCreateDto.getReservations().add(reservation);
-        userService.add(userCreateDto);
-
-        ReservationHistoryCreateDto reservationHistory = new ReservationHistoryCreateDto(new Timestamp(new Date().getTime()),ReservationType.CANCELED, ReservationType.PERMANENT, 1L);
-        reservationHistoryService.add(reservationHistory);
+        locationService.add(location);
+        locationService.addAccommodation(1L, accommodationCreateDto);
     }
 }

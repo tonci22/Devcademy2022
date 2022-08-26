@@ -1,9 +1,6 @@
 package com.agency04.devcademy.dto.request;
 
-import com.agency04.devcademy.domain.Reservation;
-import lombok.*;
-
-import java.util.List;
+import lombok.Data;
 
 @Data
 public class UserUpdateDto {
@@ -11,4 +8,7 @@ public class UserUpdateDto {
     String firstName;
     String lastName;
     String email;
+    String password;
+    boolean enabled;
+    boolean tokenExpired;
 }

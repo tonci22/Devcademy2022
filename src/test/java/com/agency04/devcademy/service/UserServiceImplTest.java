@@ -1,6 +1,7 @@
 package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.User;
+import com.agency04.devcademy.repositories.RoleRepository;
 import com.agency04.devcademy.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,14 @@ class UserServiceImplTest {
     @Mock
     UserRepository userRepository;
 
+    @Mock
+    RoleRepository roleRepository;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        userService = new UserServiceImpl(userRepository, reservationService);
+        userService = new UserServiceImpl(userRepository, reservationService, roleRepository);
     }
 
     @Test

@@ -2,32 +2,27 @@ package com.agency04.devcademy.service;
 
 import com.agency04.devcademy.domain.Accommodation;
 import com.agency04.devcademy.domain.Location;
-import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.dto.request.AccommodationCreateDto;
 import com.agency04.devcademy.dto.request.AccommodationUpdateDto;
 import com.agency04.devcademy.dto.request.LocationCreateDto;
 import com.agency04.devcademy.dto.request.LocationUpdateDto;
 import com.agency04.devcademy.exception.ResourceNotFoundException;
+import com.agency04.devcademy.mapper.AccommodationMapper;
 import com.agency04.devcademy.repositories.LocationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
     private final AccommodationService accommodationService;
 
-    @Autowired
     private AccommodationMapper accommodationMapper;
-
-    public LocationServiceImpl(LocationRepository locationRepository, AccommodationService accommodationService) {
-        this.locationRepository = locationRepository;
-        this.accommodationService = accommodationService;
-    }
 
     @Override
     public Location add(LocationCreateDto locationCreateDto) {

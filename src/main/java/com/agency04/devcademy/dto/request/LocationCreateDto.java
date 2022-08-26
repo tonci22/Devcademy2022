@@ -1,7 +1,7 @@
 package com.agency04.devcademy.dto.request;
 
 
-import lombok.*;
+import lombok.Data;
 
 import java.util.List;
 
